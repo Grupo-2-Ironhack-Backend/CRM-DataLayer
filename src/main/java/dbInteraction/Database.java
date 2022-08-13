@@ -24,7 +24,7 @@ import java.util.List;
  *  List<Account> accountList = database.getAccountList();
  *
  *  This program should load all data from the database right after it is started and
- *  should update the database when it exits.
+ *  should update the database everytime we add information to a classList.
  */
 
 public class Database {
