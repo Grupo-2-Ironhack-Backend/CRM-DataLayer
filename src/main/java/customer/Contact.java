@@ -17,27 +17,6 @@ public class Contact extends Lead {
         super(id, name, phoneNumber, email, companyName);
     }
 
-    public static List<Contact> loadContactsFromDatabase() {
-        Contact[] contactArray;
-        List<Contact> contactList;
-        try {
-            Reader reader = Files.newBufferedReader(Paths.get("db/contacts.json"));
-            contactArray = new Gson().fromJson(reader, Contact[].class);
-            contactList = Arrays.asList(contactArray);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return contactList;
-    }
 
-    public static void updateContactsDatabase(List<Contact> contactList) {
-        try {
-            FileWriter writer = new FileWriter("db/contacts.json");
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            writer.write(gson.toJson(contactList));
-            writer.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
 }

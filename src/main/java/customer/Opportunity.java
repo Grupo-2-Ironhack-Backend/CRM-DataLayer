@@ -41,27 +41,6 @@ public class Opportunity {
                 '}';
     }
 
-    public static List<Opportunity> loadOpportunitiesFromDatabase() {
-        Opportunity[] opportunityArray;
-        List<Opportunity> opportunityList;
-        try {
-            Reader reader = Files.newBufferedReader(Paths.get("db/opportunities.json"));
-            opportunityArray = new Gson().fromJson(reader, Opportunity[].class);
-            opportunityList = Arrays.asList(opportunityArray);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return opportunityList;
-    }
 
-    public static void updateOpportunitiesDatabase(List<Opportunity> opportunityList) {
-        try {
-            FileWriter writer = new FileWriter("db/opportunities.json");
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            writer.write(gson.toJson(opportunityList));
-            writer.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
 }
