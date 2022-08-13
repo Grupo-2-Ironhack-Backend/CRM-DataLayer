@@ -1,6 +1,8 @@
 package customer;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
@@ -34,5 +36,6 @@ public class Lead {
                 ", companyName='" + companyName + '\'' +
                 '}';
     }
+
 
 }

@@ -1,3 +1,5 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import customer.*;
 import dbInteraction.Database;
 import java.util.ArrayList;
@@ -53,11 +55,14 @@ public class Main {
 
 
         Database database = new Database();
-        System.out.println(database.getAccountList());
-        System.out.println(database.getContactList());
-        System.out.println(database.getLeadList());
-        System.out.println(database.getOpportunityList());
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+        System.out.println(gson.toJson(database.getAccountList()));
+        System.out.println(gson.toJson(database.getContactList()));
+        System.out.println(gson.toJson(database.getLeadList()));
+        System.out.println(gson.toJson(database.getLeadList()));
         System.out.println(database.getOpportunityList().get(1).getNumberOfTrucks());
+
     }
 
  }
