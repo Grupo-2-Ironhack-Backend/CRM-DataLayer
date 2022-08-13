@@ -1,6 +1,8 @@
 package customer;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
@@ -51,7 +53,7 @@ public class Account {
     public static void updateAccountsDatabase(List<Account> accountList) {
         try {
             FileWriter writer = new FileWriter("db/accounts.json");
-            Gson gson = new Gson();
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
             writer.write(gson.toJson(accountList));
             writer.close();
         } catch (IOException e) {

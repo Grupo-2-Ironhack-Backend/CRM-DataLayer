@@ -1,6 +1,8 @@
 package customer;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
@@ -31,7 +33,7 @@ public class Contact extends Lead {
     public static void updateContactsDatabase(List<Contact> contactList) {
         try {
             FileWriter writer = new FileWriter("db/contacts.json");
-            Gson gson = new Gson();
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
             writer.write(gson.toJson(contactList));
             writer.close();
         } catch (IOException e) {

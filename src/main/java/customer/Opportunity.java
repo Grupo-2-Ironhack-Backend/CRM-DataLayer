@@ -1,6 +1,8 @@
 package customer;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
@@ -55,7 +57,7 @@ public class Opportunity {
     public static void updateOpportunitiesDatabase(List<Opportunity> opportunityList) {
         try {
             FileWriter writer = new FileWriter("db/opportunities.json");
-            Gson gson = new Gson();
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
             writer.write(gson.toJson(opportunityList));
             writer.close();
         } catch (IOException e) {
