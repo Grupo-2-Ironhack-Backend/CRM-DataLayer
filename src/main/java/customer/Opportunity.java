@@ -16,6 +16,43 @@ public class Opportunity {
     private Contact decisionMaker;
     private ProductType productType;
     private int numberOfTrucks;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public Contact getDecisionMaker() {
+        return decisionMaker;
+    }
+
+    public void setDecisionMaker(Contact decisionMaker) {
+        this.decisionMaker = decisionMaker;
+    }
+
+    public ProductType getProductType() {
+        return productType;
+    }
+
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
+    }
+
+    public void setNumberOfTrucks(int numberOfTrucks) {
+        this.numberOfTrucks = numberOfTrucks;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     private Status status;
 
     public Opportunity(Contact decisionMaker, ProductType productType, int numberOfTrucks, Status status) {
@@ -44,6 +81,8 @@ public class Opportunity {
     public static List<Opportunity> loadOpportunitiesFromDatabase() {
         Opportunity[] opportunityArray;
         List<Opportunity> opportunityList;
+
+        //List<Opportunity> opportunityArray = new ArrayList<Opportunity>();
         try {
             Reader reader = Files.newBufferedReader(Paths.get("db/opportunities.json"));
             opportunityArray = new Gson().fromJson(reader, Opportunity[].class);

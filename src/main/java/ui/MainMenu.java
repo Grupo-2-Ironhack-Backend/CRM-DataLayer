@@ -10,17 +10,21 @@ public class MainMenu {
 
     private final String mainMenu = "\n\n================= Welcome to IronCRM =================\n" +
             "\nUse this tool to interact with your Lead database\n" +
-            "and perform operations from them:\n" +
-            "- Lookup for all leads or an specific lead by id:\n" +
-            "\t\t\"showleads\": shows a list of all leads presents in database.\n" +
-            "\t\t\"lookuplead\": returns an specific lead, searched by id.\n\n";
+            "and perform operations from them:\n\n" +
+            "\t\"showleads\": shows a list of all leads presents in database.\n" +
+            "\t\"lookuplead\": returns an specific lead, searched by id.\n" +
+            "\t\"newlead\": creates a new lead by asking for the new info.\n" +
+            "\t\"removelead\": removes the lead associated with specified id.\n" +
+            "\t\"convert\": converts a lead into an opportunity and creates \n" +
+            "\t\tits associated contact and account.\n" +
+            "\t\"exit\": exits the program.\n";
 
     private final String commandResume = "\n\nCheatsheet:\n" +
             "showleads: prints a list of all leads\n" +
             "lookuplead: prints a specific lead found by id\n" +
             "newlead: creates a new lead providing all data\n" +
             "removelead: removes a lead, specified by id\n" +
-            "convert: converts a lead to an opportunity, in the process creates a new contact and account." +
+            "convert: converts a lead to an opportunity, in the process creates a new contact and account.\n" +
             "exit: exits the program\n";
     public void executeCommand() {
 
@@ -55,7 +59,7 @@ public class MainMenu {
 
                 case "removelead":
                     System.out.println("\nEnter id for the lead to remove: ");
-                    String  userIdLeadToRemove = userInput.nextLine();
+                    String userIdLeadToRemove = userInput.nextLine();
 
                     db.removeLeadByID(UUID.fromString(userIdLeadToRemove));
 
@@ -89,11 +93,19 @@ public class MainMenu {
                     int trucks = userInput.nextInt();
 
                     Opportunity newOp = db.convertFromLeadToOpportunity(UUID.fromString(userLeadToConvert), product, trucks);
-                    System.out.println("\nA new opportunity has been created with id: " + userLeadToConvert);
+                    System.out.println("\nA new opportunity has been created with id: " + newOp.getId());
 
                     System.out.println("\nCreating new account...............");
-                    System.out.println("Enter industry: ");
-                    Activity industry = Activity.valueOf(userInput.nextLine());
+                    System.out.println("Enter industry [Produce/Ecommerce/Manufacturing/Medical]: ");
+
+                    String industryName = userInput.nextLine();
+
+                    Activity userIndustry = null;
+                    for (Activity industry : Activity.values()) {
+                        if (industryName == industry.name()) {
+                            userIndustry = industry;
+                        }
+                    }
 
                     System.out.println("\nEnter the city: ");
                     String city = userInput.nextLine();
@@ -101,7 +113,7 @@ public class MainMenu {
                     System.out.println("\nEnter the country: ");
                     String country = userInput.nextLine();
 
-                    db.createAndAddAccount(industry, city, country);
+                    db.createAndAddAccount(userIndustry, city, country);
 
                     System.out.println("Details of the new opportunity: " + newOp.toString());
                     System.out.println(commandResume);

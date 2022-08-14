@@ -80,6 +80,7 @@ public class Lead {
     public static List<Lead> loadLeadsFromDatabase() {
         Lead[] leadArray;
         List<Lead> leadList;
+        //List<Lead> leadArray = new ArrayList<Lead>();
         try {
             Reader reader = Files.newBufferedReader(Paths.get("db/leads.json"));
             leadArray = new Gson().fromJson(reader, Lead[].class);

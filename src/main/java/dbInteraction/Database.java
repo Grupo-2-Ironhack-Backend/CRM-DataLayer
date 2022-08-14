@@ -82,16 +82,24 @@ public class Database {
         return null;
     }
 
+    public boolean addOpportunity(Opportunity newOpportunity) {
+        opportunityList.add(newOpportunity);
+        return true;
+    }
+
+    public boolean addContact(Contact newContact) {
+        contactList.add(newContact);
+        return true;
+    }
+
     public Opportunity convertFromLeadToOpportunity(UUID id, ProductType prodType, int truckNumber) {
         Lead leadFound = getLeadByID(id);
 
         Contact newContact = new Contact(leadFound.getName(), leadFound.getPhoneNumber(), leadFound.getEmail(), leadFound.getCompanyName());
         Opportunity newOpportunity = new Opportunity(newContact, prodType, truckNumber, Status.OPEN);
 
-        contactList.add(newContact);
-        //getContactList().add(newContact);
-        opportunityList.add(newOpportunity);
-        //getOpportunityList().add(newOpportunity);
+        addContact(newContact);
+        addOpportunity(newOpportunity);
 
         leadList.remove(leadFound);
 
