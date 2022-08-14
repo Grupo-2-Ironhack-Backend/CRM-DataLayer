@@ -6,21 +6,63 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 
 public class Lead {
-    private String id;
+    private UUID id;
     private String name;
     private String phoneNumber;
     private String email;
     private String companyName;
-    public Lead(String id, String name, String phoneNumber, String email, String companyName) {
-        this.id = id;
+    public Lead(String name, String phoneNumber, String email, String companyName) {
+        this.id = UUID.randomUUID();
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.companyName = companyName;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
 
@@ -41,7 +83,7 @@ public class Lead {
         try {
             Reader reader = Files.newBufferedReader(Paths.get("db/leads.json"));
             leadArray = new Gson().fromJson(reader, Lead[].class);
-            leadList = Arrays.asList(leadArray);
+            leadList = new ArrayList<>(Arrays.asList(leadArray));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

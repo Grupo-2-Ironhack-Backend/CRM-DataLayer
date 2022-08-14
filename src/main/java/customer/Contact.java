@@ -6,13 +6,14 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Contact extends Lead {
 
-    public Contact(String id, String name, String phoneNumber, String email, String companyName) {
-        super(id, name, phoneNumber, email, companyName);
+    public Contact(String name, String phoneNumber, String email, String companyName) {
+        super(name, phoneNumber, email, companyName);
     }
 
     public static List<Contact> loadContactsFromDatabase() {
@@ -21,7 +22,7 @@ public class Contact extends Lead {
         try {
             Reader reader = Files.newBufferedReader(Paths.get("db/contacts.json"));
             contactArray = new Gson().fromJson(reader, Contact[].class);
-            contactList = Arrays.asList(contactArray);
+            contactList = new ArrayList<>(Arrays.asList(contactArray));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

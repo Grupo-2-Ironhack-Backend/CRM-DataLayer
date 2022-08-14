@@ -6,18 +6,20 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public class Account {
-    private String id;
+    private UUID id;
     private Activity industry;
     private String city; // This could also be a very long string of cities
     private String country;
     private List<Opportunity> opportunities;
 
-    public Account(String id, Activity industry, String city, String country, List<Opportunity> opportunities) {
-        this.id = id;
+    public Account(Activity industry, String city, String country, List<Opportunity> opportunities) {
+        this.id = UUID.randomUUID();
         this.industry = industry;
         this.city = city;
         this.country = country;
@@ -41,7 +43,7 @@ public class Account {
         try {
             Reader reader = Files.newBufferedReader(Paths.get("db/accounts.json"));
             accountArray = new Gson().fromJson(reader, Account[].class);
-            accountList = Arrays.asList(accountArray);
+            accountList = new ArrayList<>(Arrays.asList(accountArray));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -1,1 +1,3 @@
-[{"id":"1","name":"Joan","phoneNumber":"123456789","email":"oscar@hola.com","companyName":"TotalTruck"},{"id":"2","name":"Marc","phoneNumber":"9876543","email":"1@1.es","companyName":"TotalTruck"},{"id":"3","name":"Juan","phoneNumber":"9876543","email":"2@2.es","companyName":"TotalTruck"}]
+[{"id":"018cacc3-1378-4fb0-92a9-06303e7c9ff1","name":"Joan","phoneNumber":"123456789","email":"oscar@hola.com","companyName":"TotalTruck"},
+  {"id":"d9bb42a4-049f-4092-949b-c271c17c6035","name":"Marc","phoneNumber":"9876543","email":"1@1.es","companyName":"TotalTruck"},
+  {"id":"b368f983-d4f6-4e27-b6ec-85ccc488c1e0","name":"Juan","phoneNumber":"9876543","email":"2@2.es","companyName":"TotalTruck"}]

@@ -1,10 +1,10 @@
 package dbInteraction;
 
-import customer.Account;
-import customer.Contact;
-import customer.Lead;
-import customer.Opportunity;
+import com.google.gson.Gson;
+import customer.*;
+
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -72,4 +72,50 @@ public class Database {
         this.opportunityList = opportunityList;
     }
 
+    public Lead getLeadByID (UUID id) {
+        for (Lead lead : leadList) {
+            if (lead.getId().equals(id)) {
+                return lead;
+            }
+        }
+
+        return null;
+    }
+
+    public Opportunity convertFromLeadToOpportunity(UUID id, ProductType prodType, int truckNumber) {
+        Lead leadFound = getLeadByID(id);
+
+        Contact newContact = new Contact(leadFound.getName(), leadFound.getPhoneNumber(), leadFound.getEmail(), leadFound.getCompanyName());
+        Opportunity newOpportunity = new Opportunity(newContact, prodType, truckNumber, Status.OPEN);
+
+        contactList.add(newContact);
+        //getContactList().add(newContact);
+        opportunityList.add(newOpportunity);
+        //getOpportunityList().add(newOpportunity);
+
+        leadList.remove(leadFound);
+
+        return newOpportunity;
+    }
+
+    public void createAndAddLead(String name, String phone, String email, String company) {
+        Lead newLead = new Lead(name, phone, email, company);
+        leadList.add(newLead);
+    }
+
+    public void removeLeadByID(UUID id) {
+        Lead leadToRemove = getLeadByID(id);
+        leadList.remove(leadToRemove);
+    }
+
+    public void createAndAddAccount(Activity industry, String city, String country) {
+        Account newAccount = new Account(industry, city, country, this.getOpportunityList());
+        accountList.add(newAccount);
+    }
+
+    public void exportClassToJSON(Object object) {
+        Gson gson = new Gson();
+        String objToJSON = gson.toJson(object);
+        System.out.println(objToJSON);
+    }
 }

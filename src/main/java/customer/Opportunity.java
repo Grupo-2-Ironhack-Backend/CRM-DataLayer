@@ -6,20 +6,22 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public class Opportunity {
-    private String id;
+    private UUID id;
     private Contact decisionMaker;
-    private ProductType porductType;
+    private ProductType productType;
     private int numberOfTrucks;
     private Status status;
 
-    public Opportunity(String id, Contact decisionMaker, ProductType porductType, int numberOfTrucks, Status status) {
-        this.id = id;
+    public Opportunity(Contact decisionMaker, ProductType productType, int numberOfTrucks, Status status) {
+        this.id = UUID.randomUUID();
         this.decisionMaker = decisionMaker;
-        this.porductType = porductType;
+        this.productType = productType;
         this.numberOfTrucks = numberOfTrucks;
         this.status = status;
     }
@@ -33,7 +35,7 @@ public class Opportunity {
         return "Opportunity{" +
                 "id=" + id +
                 ", decisionMaker=" + decisionMaker +
-                ", porductType=" + porductType +
+                ", porductType=" + productType +
                 ", numberOfTrucks=" + numberOfTrucks +
                 ", status=" + status +
                 '}';
@@ -45,7 +47,7 @@ public class Opportunity {
         try {
             Reader reader = Files.newBufferedReader(Paths.get("db/opportunities.json"));
             opportunityArray = new Gson().fromJson(reader, Opportunity[].class);
-            opportunityList = Arrays.asList(opportunityArray);
+            opportunityList = new ArrayList<>(Arrays.asList(opportunityArray));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
