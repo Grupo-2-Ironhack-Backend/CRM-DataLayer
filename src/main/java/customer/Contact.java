@@ -1,12 +1,7 @@
 package customer;
 
-
 public class Contact extends Lead {
-
-    public Contact(String id, String name, String phoneNumber, String email, String companyName) {
-        super(id, name, phoneNumber, email, companyName);
+    public Contact(String name, String phoneNumber, String email, String companyName) {
+        super(name, phoneNumber, email, companyName);
     }
-
-
-
 }

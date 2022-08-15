@@ -1,20 +1,10 @@
 package dbInteraction;
 
 import com.google.gson.Gson;
+import customer.*;
 
-import com.google.gson.GsonBuilder;
-import customer.Account;
-import customer.Contact;
-import customer.Lead;
-import customer.Opportunity;
-
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -44,26 +34,10 @@ public class Database {
     private List<Opportunity> opportunityList;
 
     public Database() {
-        this.accountList = loadAccountsFromDatabase();
-        this.contactList = loadContactsFromDatabase();
-        this.leadList = loadLeadsFromDatabase();
-        this.opportunityList = loadOpportunitiesFromDatabase();
-    }
-
-    public List<Account> getAccountList() {
-        return accountList;
-    }
-
-    public void setAccountList(List<Account> accountList) {
-        this.accountList = accountList;
-    }
-
-    public List<Contact> getContactList() {
-        return contactList;
-    }
-
-    public void setContactList(List<Contact> contactList) {
-        this.contactList = contactList;
+        this.accountList = DBLoader.loadAccountsFromDatabase();
+        this.contactList = DBLoader.loadContactsFromDatabase();
+        this.leadList = DBLoader.loadLeadsFromDatabase();
+        this.opportunityList = DBLoader.loadOpportunitiesFromDatabase();
     }
 
     public List<Lead> getLeadList() {
@@ -74,6 +48,25 @@ public class Database {
         this.leadList = leadList;
     }
 
+    public Lead getLeadByID (UUID id) {
+        for (Lead lead : leadList) {
+            if (lead.getId().equals(id)) {
+                return lead;
+            }
+        }
+        return null;
+    }
+
+    public void createAndAddLead(String name, String phone, String email, String company) {
+        Lead newLead = new Lead(name, phone, email, company);
+        leadList.add(newLead);
+    }
+
+    public void removeLeadByID(UUID id) {
+        Lead leadToRemove = getLeadByID(id);
+        leadList.remove(leadToRemove);
+    }
+
     public List<Opportunity> getOpportunityList() {
         return opportunityList;
     }
@@ -82,101 +75,54 @@ public class Database {
         this.opportunityList = opportunityList;
     }
 
-
-    public static List<Account> loadAccountsFromDatabase() {
-        Account[] accountArray;
-        List<Account> accountList;
-        try {
-            Reader reader = Files.newBufferedReader(Paths.get("db/accounts.json"));
-            accountArray = new Gson().fromJson(reader, Account[].class);
-            accountList = Arrays.asList(accountArray);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return accountList;
+    public boolean addOpportunity(Opportunity newOpportunity) {
+        opportunityList.add(newOpportunity);
+        return true;
     }
 
-    public static void updateAccountsDatabase(List<Account> accountList) {
-        try {
-            FileWriter writer = new FileWriter("db/accounts.json");
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            writer.write(gson.toJson(accountList));
-            writer.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public static List<Contact> loadContactsFromDatabase() {
-        Contact[] contactArray;
-        List<Contact> contactList;
-        try {
-            Reader reader = Files.newBufferedReader(Paths.get("db/contacts.json"));
-            contactArray = new Gson().fromJson(reader, Contact[].class);
-            contactList = Arrays.asList(contactArray);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public List<Contact> getContactList() {
         return contactList;
     }
 
-    public static void updateContactsDatabase(List<Contact> contactList) {
-        try {
-            FileWriter writer = new FileWriter("db/contacts.json");
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            writer.write(gson.toJson(contactList));
-            writer.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public void setContactList(List<Contact> contactList) {
+        this.contactList = contactList;
     }
 
-    public static List<Lead> loadLeadsFromDatabase() {
-        Lead[] leadArray;
-        List<Lead> leadList;
-        try {
-            Reader reader = Files.newBufferedReader(Paths.get("db/leads.json"));
-            leadArray = new Gson().fromJson(reader, Lead[].class);
-            leadList = Arrays.asList(leadArray);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return leadList;
+    public boolean addContact(Contact newContact) {
+        contactList.add(newContact);
+        return true;
     }
 
-    public static void updateLeadsDatabase(List<Lead> leadList) {
-        try {
-            FileWriter writer = new FileWriter("db/leads.json");
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            writer.write(gson.toJson(leadList));
-            writer.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public List<Account> getAccountList() {
+        return accountList;
     }
 
-    public static List<Opportunity> loadOpportunitiesFromDatabase() {
-        Opportunity[] opportunityArray;
-        List<Opportunity> opportunityList;
-        try {
-            Reader reader = Files.newBufferedReader(Paths.get("db/opportunities.json"));
-            opportunityArray = new Gson().fromJson(reader, Opportunity[].class);
-            opportunityList = Arrays.asList(opportunityArray);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return opportunityList;
+    public void setAccountList(List<Account> accountList) {
+        this.accountList = accountList;
     }
 
-    public static void updateOpportunitiesDatabase(List<Opportunity> opportunityList) {
-        try {
-            FileWriter writer = new FileWriter("db/opportunities.json");
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            writer.write(gson.toJson(opportunityList));
-            writer.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public void createAndAddAccount(Activity industry, String city, String country) {
+        Account newAccount = new Account(industry, city, country, this.getOpportunityList());
+        accountList.add(newAccount);
     }
 
+    public Opportunity convertFromLeadToOpportunity(UUID id, ProductType prodType, int truckNumber) {
+        Lead leadFound = getLeadByID(id);
+
+        Contact newContact = new Contact(leadFound.getName(), leadFound.getPhoneNumber(), leadFound.getEmail(), leadFound.getCompanyName());
+        Opportunity newOpportunity = new Opportunity(newContact, prodType, truckNumber, Status.OPEN);
+
+        addContact(newContact);
+        addOpportunity(newOpportunity);
+
+        leadList.remove(leadFound);
+
+        return newOpportunity;
+    }
+
+    public void exportClassToJSON(Object object) {
+        Gson gson = new Gson();
+        String objToJSON = gson.toJson(object);
+        System.out.println(objToJSON);
+    }
 }
