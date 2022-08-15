@@ -7,9 +7,11 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        // pruebasIO(); //Debería imprimir las arrays en formato JSON
+        // First we clone the repository into a new directory called db
         Database.cloneDatabase();
+        // Then we execute some commands to update the database
         pruebasIO();
+        // Then we push the updated database to the github repository
         Database.pushOne();
     }
 

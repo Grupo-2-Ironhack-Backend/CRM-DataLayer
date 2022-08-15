@@ -61,33 +61,6 @@ public class Database {
         this.opportunityList = loadOpportunitiesFromDatabase();
     }
 
-    public static void cloneDatabase() {
-        try {
-            Git.cloneRepository()
-                    .setURI("https://github.com/Grupo-2-Ironhack-Backend/CRM_DB.git")
-                    .setDirectory(new File(Paths.get("").toAbsolutePath().toString() + "/db"))
-                    .call();
-        } catch (GitAPIException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void pushOne(){
-        try {
-            Git git = Git.open(new File(Paths.get("").toAbsolutePath().toString() + "/db"));
-            Repository repository = git.getRepository();
-            UsernamePasswordCredentialsProvider credentialsProvider = new UsernamePasswordCredentialsProvider("crmdbonly", "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");
-            // File myFile = new File(git.getRepository().getDirectory().getParent(), "testfile");
-            git.add().addFilepattern(".").call();
-            git.commit().setMessage("Auto-update").call();
-            PushCommand command = git.push().setForce(true);
-            command.setCredentialsProvider(credentialsProvider);
-            command.call();
-        } catch (IOException | GitAPIException e ) {
-            e.printStackTrace();
-        }
-    }
-
     public List<Account> getAccountList() {
         return accountList;
     }
@@ -214,6 +187,34 @@ public class Database {
             writer.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public static void cloneDatabase() {
+        try {
+            String envUri = System.getenv("JAVA_APP_URI");
+            Git.cloneRepository()
+                    .setURI(envUri)
+                    .setDirectory(new File(Paths.get("").toAbsolutePath().toString() + "/db"))
+                    .call();
+        } catch (GitAPIException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void pushOne(){
+        try {
+            String envUsername = System.getenv("JAVA_APP_USERNAME");
+            String envAccessToken = System.getenv("JAVA_APP_PASSWORD");
+            Git git = Git.open(new File(Paths.get("").toAbsolutePath().toString() + "/db"));
+            UsernamePasswordCredentialsProvider credentialsProvider = new UsernamePasswordCredentialsProvider(envUsername, envAccessToken);
+            git.add().addFilepattern(".").call();
+            git.commit().setMessage("Auto-update").call();
+            PushCommand command = git.push().setForce(true);
+            command.setCredentialsProvider(credentialsProvider);
+            command.call();
+        } catch (IOException | GitAPIException e ) {
+            e.printStackTrace();
         }
     }
 
