@@ -76,20 +76,6 @@ public class Lead {
                 ", companyName='" + companyName + '\'' +
                 '}';
     }
-
-    public static List<Lead> loadLeadsFromDatabase() {
-        Lead[] leadArray;
-        List<Lead> leadList;
-        //List<Lead> leadArray = new ArrayList<Lead>();
-        try {
-            Reader reader = Files.newBufferedReader(Paths.get("db/leads.json"));
-            leadArray = new Gson().fromJson(reader, Lead[].class);
-            leadList = new ArrayList<>(Arrays.asList(leadArray));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return leadList;
-    }
     
     public static void updateLeadsDatabase(List<Lead> leadList) {
         try {

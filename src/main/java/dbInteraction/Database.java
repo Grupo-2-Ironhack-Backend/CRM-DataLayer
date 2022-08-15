@@ -34,26 +34,10 @@ public class Database {
     private List<Opportunity> opportunityList;
 
     public Database() {
-        this.accountList = Account.loadAccountsFromDatabase();
-        this.contactList = Contact.loadContactsFromDatabase();
-        this.leadList = Lead.loadLeadsFromDatabase();
-        this.opportunityList = Opportunity.loadOpportunitiesFromDatabase();
-    }
-
-    public List<Account> getAccountList() {
-        return accountList;
-    }
-
-    public void setAccountList(List<Account> accountList) {
-        this.accountList = accountList;
-    }
-
-    public List<Contact> getContactList() {
-        return contactList;
-    }
-
-    public void setContactList(List<Contact> contactList) {
-        this.contactList = contactList;
+        this.accountList = DBLoader.loadAccountsFromDatabase();
+        this.contactList = DBLoader.loadContactsFromDatabase();
+        this.leadList = DBLoader.loadLeadsFromDatabase();
+        this.opportunityList = DBLoader.loadOpportunitiesFromDatabase();
     }
 
     public List<Lead> getLeadList() {
@@ -64,6 +48,25 @@ public class Database {
         this.leadList = leadList;
     }
 
+    public Lead getLeadByID (UUID id) {
+        for (Lead lead : leadList) {
+            if (lead.getId().equals(id)) {
+                return lead;
+            }
+        }
+        return null;
+    }
+
+    public void createAndAddLead(String name, String phone, String email, String company) {
+        Lead newLead = new Lead(name, phone, email, company);
+        leadList.add(newLead);
+    }
+
+    public void removeLeadByID(UUID id) {
+        Lead leadToRemove = getLeadByID(id);
+        leadList.remove(leadToRemove);
+    }
+
     public List<Opportunity> getOpportunityList() {
         return opportunityList;
     }
@@ -72,24 +75,35 @@ public class Database {
         this.opportunityList = opportunityList;
     }
 
-    public Lead getLeadByID (UUID id) {
-        for (Lead lead : leadList) {
-            if (lead.getId().equals(id)) {
-                return lead;
-            }
-        }
-
-        return null;
-    }
-
     public boolean addOpportunity(Opportunity newOpportunity) {
         opportunityList.add(newOpportunity);
         return true;
     }
 
+    public List<Contact> getContactList() {
+        return contactList;
+    }
+
+    public void setContactList(List<Contact> contactList) {
+        this.contactList = contactList;
+    }
+
     public boolean addContact(Contact newContact) {
         contactList.add(newContact);
         return true;
+    }
+
+    public List<Account> getAccountList() {
+        return accountList;
+    }
+
+    public void setAccountList(List<Account> accountList) {
+        this.accountList = accountList;
+    }
+
+    public void createAndAddAccount(Activity industry, String city, String country) {
+        Account newAccount = new Account(industry, city, country, this.getOpportunityList());
+        accountList.add(newAccount);
     }
 
     public Opportunity convertFromLeadToOpportunity(UUID id, ProductType prodType, int truckNumber) {
@@ -104,21 +118,6 @@ public class Database {
         leadList.remove(leadFound);
 
         return newOpportunity;
-    }
-
-    public void createAndAddLead(String name, String phone, String email, String company) {
-        Lead newLead = new Lead(name, phone, email, company);
-        leadList.add(newLead);
-    }
-
-    public void removeLeadByID(UUID id) {
-        Lead leadToRemove = getLeadByID(id);
-        leadList.remove(leadToRemove);
-    }
-
-    public void createAndAddAccount(Activity industry, String city, String country) {
-        Account newAccount = new Account(industry, city, country, this.getOpportunityList());
-        accountList.add(newAccount);
     }
 
     public void exportClassToJSON(Object object) {
