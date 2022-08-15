@@ -54,13 +54,6 @@ public class Database {
     private List<Lead> leadList;
     private List<Opportunity> opportunityList;
 
-    public Database() {
-        this.accountList = loadAccountsFromDatabase();
-        this.contactList = loadContactsFromDatabase();
-        this.leadList = loadLeadsFromDatabase();
-        this.opportunityList = loadOpportunitiesFromDatabase();
-    }
-
     public List<Account> getAccountList() {
         return accountList;
     }
@@ -192,29 +185,51 @@ public class Database {
 
     public static void cloneDatabase() {
         try {
-            String envUri = System.getenv("JAVA_APP_URI");
+            // Method 1 for accessing repository: Environment variables (Best Practices)
+            //String envUri = System.getenv("JAVA_APP_URI");
+            //Git.cloneRepository()
+            //        .setURI(envUri)
+            //        .setDirectory(new File(Paths.get("").toAbsolutePath().toString() + "/db"))
+            //        .call();
+
+            // Method 2 for accessing repository: Configuration File (Easier)
+            String cfgUri = PropertyFileReader.getPropValues()[0];
             Git.cloneRepository()
-                    .setURI(envUri)
+                    .setURI(cfgUri)
                     .setDirectory(new File(Paths.get("").toAbsolutePath().toString() + "/db"))
                     .call();
         } catch (GitAPIException e) {
-            e.printStackTrace();
+            // e.printStackTrace(); // We don't want to fail the program if the clone fails.
+            System.err.println("Failed to clone the database, but still continuing.");
+        } catch (IOException e) {
+            System.err.println("Failed to clone the database, but still continuing.");
+            //throw new RuntimeException(e);
         }
     }
 
     public static void pushOne(){
         try {
-            String envUsername = System.getenv("JAVA_APP_USERNAME");
-            String envAccessToken = System.getenv("JAVA_APP_PASSWORD");
+            // Method 1 for providing credentials: Environment variables (Best Practices)
+            // String envUsername = System.getenv("JAVA_APP_USERNAME");
+            // String envAccessToken = System.getenv("JAVA_APP_PASSWORD");
+            // UsernamePasswordCredentialsProvider credentialsProvider = new UsernamePasswordCredentialsProvider(envUsername, envAccessToken);
+
+            // Method 2 for providing credentials: Configuration File (Easier)
+            String cfgUsername = PropertyFileReader.getPropValues()[1];
+            String cfgAccessToken = PropertyFileReader.getPropValues()[2];
+            System.out.println(cfgUsername);
+            // System.out.println(cfgAccessToken);
+            UsernamePasswordCredentialsProvider credentialsProvider = new UsernamePasswordCredentialsProvider(cfgUsername, cfgAccessToken);
+
             Git git = Git.open(new File(Paths.get("").toAbsolutePath().toString() + "/db"));
-            UsernamePasswordCredentialsProvider credentialsProvider = new UsernamePasswordCredentialsProvider(envUsername, envAccessToken);
             git.add().addFilepattern(".").call();
             git.commit().setMessage("Auto-update").call();
             PushCommand command = git.push().setForce(true);
             command.setCredentialsProvider(credentialsProvider);
             command.call();
         } catch (IOException | GitAPIException e ) {
-            e.printStackTrace();
+            e.printStackTrace(); // We don't want to fail the program if the push fails
+            System.err.println("Error pushing to remote repository, but still updating local database.");
         }
     }
 

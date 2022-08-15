@@ -33,10 +33,10 @@ public class Main {
         Account account1 = new Account("1", Activity.EXAMPLE, "Madrid", "Spain", opportunities);
         List<Account> accounts = new ArrayList<>();
 
-        Database database = new Database();
+        // Database database = new Database();
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-        List<Account> accountList = (database.loadAccountsFromDatabase());
+        List<Account> accountList = Database.loadAccountsFromDatabase();
         accountList.add(account1);
         Database.updateAccountsDatabase(accountList);
         // System.out.println(gson.toJson(database.getAccountList()));
