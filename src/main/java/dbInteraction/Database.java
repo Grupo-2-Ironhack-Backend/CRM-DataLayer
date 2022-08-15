@@ -10,8 +10,6 @@ import customer.Opportunity;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.PushCommand;
 import org.eclipse.jgit.api.errors.GitAPIException;
-import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 
 import java.io.File;
@@ -23,8 +21,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static com.sun.source.util.DocTreePath.getPath;
 
 
 /**
@@ -193,7 +189,7 @@ public class Database {
             //        .call();
 
             // Method 2 for accessing repository: Configuration File (Easier)
-            String cfgUri = PropertyFileReader.getPropValues()[0];
+            String cfgUri = PropertyFileReader.getPropValues().get("JAVA_APP_URI");
             Git.cloneRepository()
                     .setURI(cfgUri)
                     .setDirectory(new File(Paths.get("").toAbsolutePath().toString() + "/db"))
@@ -215,10 +211,8 @@ public class Database {
             // UsernamePasswordCredentialsProvider credentialsProvider = new UsernamePasswordCredentialsProvider(envUsername, envAccessToken);
 
             // Method 2 for providing credentials: Configuration File (Easier)
-            String cfgUsername = PropertyFileReader.getPropValues()[1];
-            String cfgAccessToken = PropertyFileReader.getPropValues()[2];
-            System.out.println(cfgUsername);
-            // System.out.println(cfgAccessToken);
+            String cfgUsername = PropertyFileReader.getPropValues().get("JAVA_APP_USERNAME");
+            String cfgAccessToken = PropertyFileReader.getPropValues().get("JAVA_APP_PASSWORD");
             UsernamePasswordCredentialsProvider credentialsProvider = new UsernamePasswordCredentialsProvider(cfgUsername, cfgAccessToken);
 
             Git git = Git.open(new File(Paths.get("").toAbsolutePath().toString() + "/db"));
