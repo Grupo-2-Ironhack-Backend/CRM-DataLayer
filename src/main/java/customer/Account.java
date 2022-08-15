@@ -37,19 +37,6 @@ public class Account {
                 '}';
     }
 
-    public static List<Account> loadAccountsFromDatabase() {
-        Account[] accountArray;
-        List<Account> accountList;
-        try {
-            Reader reader = Files.newBufferedReader(Paths.get("db/accounts.json"));
-            accountArray = new Gson().fromJson(reader, Account[].class);
-            accountList = new ArrayList<>(Arrays.asList(accountArray));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return accountList;
-    }
-
     public static void updateAccountsDatabase(List<Account> accountList) {
         try {
             FileWriter writer = new FileWriter("db/accounts.json");
