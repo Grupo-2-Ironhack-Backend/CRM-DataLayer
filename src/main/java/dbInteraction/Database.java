@@ -7,14 +7,25 @@ import customer.Account;
 import customer.Contact;
 import customer.Lead;
 import customer.Opportunity;
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.PushCommand;
+import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
+import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static com.sun.source.util.DocTreePath.getPath;
+
 
 /**
  *
@@ -48,6 +59,33 @@ public class Database {
         this.contactList = loadContactsFromDatabase();
         this.leadList = loadLeadsFromDatabase();
         this.opportunityList = loadOpportunitiesFromDatabase();
+    }
+
+    public static void cloneDatabase() {
+        try {
+            Git.cloneRepository()
+                    .setURI("https://github.com/Grupo-2-Ironhack-Backend/CRM_DB.git")
+                    .setDirectory(new File(Paths.get("").toAbsolutePath().toString() + "/db"))
+                    .call();
+        } catch (GitAPIException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void pushOne(){
+        try {
+            Git git = Git.open(new File(Paths.get("").toAbsolutePath().toString() + "/db"));
+            Repository repository = git.getRepository();
+            UsernamePasswordCredentialsProvider credentialsProvider = new UsernamePasswordCredentialsProvider("crmdbonly", "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");
+            // File myFile = new File(git.getRepository().getDirectory().getParent(), "testfile");
+            git.add().addFilepattern(".").call();
+            git.commit().setMessage("Auto-update").call();
+            PushCommand command = git.push().setForce(true);
+            command.setCredentialsProvider(credentialsProvider);
+            command.call();
+        } catch (IOException | GitAPIException e ) {
+            e.printStackTrace();
+        }
     }
 
     public List<Account> getAccountList() {
@@ -89,7 +127,7 @@ public class Database {
         try {
             Reader reader = Files.newBufferedReader(Paths.get("db/accounts.json"));
             accountArray = new Gson().fromJson(reader, Account[].class);
-            accountList = Arrays.asList(accountArray);
+            accountList = new ArrayList<>(Arrays.asList(accountArray));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

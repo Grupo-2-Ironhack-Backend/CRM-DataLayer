@@ -5,10 +5,16 @@ Delivered exercise. Lab 2.02 (IRONHACK)
 
 <!--- ![alt text](example.jpg "Ejemplo output terminal") -->
 
-## Try it with Docker
+## Full experience with Docker!
 
+From a Linux CLI or PowerShell:
 ```bash
-docker run --rm -it -v "$PWD"/java-app_db:/db team2ih/crm
+docker run --rm -it -v ${PWD}/java-app_db:/db team2ih/crm
+```
+
+From Windows CMD:
+```bash
+docker run --rm -it -v %cd%/java-app_db:/db team2ih/crm
 ```
 
 ## Usage
