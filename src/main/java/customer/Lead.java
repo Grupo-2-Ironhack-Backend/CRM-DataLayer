@@ -1,14 +1,5 @@
 package customer;
 
-import com.google.gson.Gson;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.UUID;
 
 
@@ -75,16 +66,5 @@ public class Lead {
                 ", email='" + email + '\'' +
                 ", companyName='" + companyName + '\'' +
                 '}';
-    }
-    
-    public static void updateLeadsDatabase(List<Lead> leadList) {
-        try {
-            FileWriter writer = new FileWriter("db/leads.json");
-            Gson gson = new Gson();
-            writer.write(gson.toJson(leadList));
-            writer.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

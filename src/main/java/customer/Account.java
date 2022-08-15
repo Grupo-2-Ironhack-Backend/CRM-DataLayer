@@ -1,13 +1,5 @@
 package customer;
 
-import com.google.gson.Gson;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,6 +18,46 @@ public class Account {
         this.opportunities = opportunities;
     }
 
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public Activity getIndustry() {
+        return industry;
+    }
+
+    public void setIndustry(Activity industry) {
+        this.industry = industry;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public List<Opportunity> getOpportunities() {
+        return opportunities;
+    }
+
+    public void setOpportunities(List<Opportunity> opportunities) {
+        this.opportunities = opportunities;
+    }
+
     @Override
     public String toString() {
         return "Account{" +
@@ -35,16 +67,5 @@ public class Account {
                 ", country='" + country + '\'' +
                 ", opportunities=" + opportunities +
                 '}';
-    }
-
-    public static void updateAccountsDatabase(List<Account> accountList) {
-        try {
-            FileWriter writer = new FileWriter("db/accounts.json");
-            Gson gson = new Gson();
-            writer.write(gson.toJson(accountList));
-            writer.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

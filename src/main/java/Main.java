@@ -1,12 +1,14 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import customer.*;
+import dbInteraction.CRUD;
 import dbInteraction.Database;
 import ui.MainMenu;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -26,7 +28,7 @@ public class Main {
         leads.add(lead1);
         leads.add(lead2);
         leads.add(lead3);
-        Database.updateLeadsDatabase(leads);
+        CRUD.updateLeadsDatabase(leads);
 
 
 
@@ -34,15 +36,15 @@ public class Main {
         Contact contact2 = new Contact("IT", "Madrid", "Spain", "");
         Contact contact3 = new Contact("IT", "Madrid", "Spain", "");
 
-        Contact contact1 = new Contact("1", "John", "Madrid", "Spain", "");
-        Contact contact2 = new Contact("2", "IT", "Madrid", "Spain", "");
-        Contact contact3 = new Contact("3", "IT", "Madrid", "Spain", "");
+        //Contact contact1 = new Contact("1", "John", "Madrid", "Spain", "");
+        //Contact contact2 = new Contact("2", "IT", "Madrid", "Spain", "");
+        //Contact contact3 = new Contact("3", "IT", "Madrid", "Spain", "");
 
         List<Contact> contacts = new ArrayList<>();
         contacts.add(contact1);
         contacts.add(contact2);
         contacts.add(contact3);
-        Database.updateContactsDatabase(contacts);
+        CRUD.updateContactsDatabase(contacts);
 
         Opportunity opportunity1 = new Opportunity(contact1, ProductType.EXAMPLE, 5, Status.EXAMPLE);
         Opportunity opportunity2 = new Opportunity(contact2, ProductType.EXAMPLE, 20, Status.EXAMPLE);
@@ -51,7 +53,7 @@ public class Main {
         opportunities.add(opportunity1);
         opportunities.add(opportunity2);
         opportunities.add(opportunity3);
-        Database.updateOpportunitiesDatabase(opportunities);
+        CRUD.updateOpportunitiesDatabase(opportunities);
 
 
         Account account1 = new Account(Activity.EXAMPLE, "Madrid", "Spain", opportunities);
@@ -61,7 +63,7 @@ public class Main {
         accounts.add(account1);
         accounts.add(account2);
         accounts.add(account3);
-        Database.updateAccountsDatabase(accounts);
+        CRUD.updateAccountsDatabase(accounts);
 
 
         Database database = new Database();
