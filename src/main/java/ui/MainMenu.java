@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import customer.*;
 import dbInteraction.Database;
+import dbInteraction.GitHub;
 
 public class MainMenu {
 
@@ -120,6 +121,7 @@ public class MainMenu {
                     break;
 
                 case "exit":
+                    GitHub.push();
                     System.exit(0);
                     break;
 

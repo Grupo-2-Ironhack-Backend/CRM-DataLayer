@@ -40,6 +40,7 @@ public class Database {
         this.opportunityList = DBLoader.loadOpportunitiesFromDatabase();
     }
 
+
     public List<Lead> getLeadList() {
         return leadList;
     }
