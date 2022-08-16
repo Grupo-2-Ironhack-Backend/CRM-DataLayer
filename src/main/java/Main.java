@@ -15,6 +15,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         //pruebasIO(); //Debería imprimir las arrays en formato JSON
+        GitHub.cloneDatabase(); //La clonación necesita que el directorio db esté vacío o no exista.
         MainMenu menu = new MainMenu();
         menu.executeCommand();
     }
