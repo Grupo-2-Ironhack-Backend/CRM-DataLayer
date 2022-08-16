@@ -85,13 +85,14 @@ public class Database {
 
     public static List<Account> loadAccountsFromDatabase() {
         Account[] accountArray;
-        List<Account> accountList;
+        List<Account> accountList = null;
         try {
             Reader reader = Files.newBufferedReader(Paths.get("db/accounts.json"));
             accountArray = new Gson().fromJson(reader, Account[].class);
             accountList = new ArrayList<>(Arrays.asList(accountArray));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            // throw new RuntimeException(e);
+            System.err.println("Error loading accounts from database. No accounts found.");
         }
         return accountList;
     }
@@ -109,13 +110,14 @@ public class Database {
 
     public static List<Contact> loadContactsFromDatabase() {
         Contact[] contactArray;
-        List<Contact> contactList;
+        List<Contact> contactList = null;
         try {
             Reader reader = Files.newBufferedReader(Paths.get("db/contacts.json"));
             contactArray = new Gson().fromJson(reader, Contact[].class);
             contactList = Arrays.asList(contactArray);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            // throw new RuntimeException(e);
+            System.err.println("Error loading contacts from database. No contacts found.");
         }
         return contactList;
     }
@@ -133,13 +135,14 @@ public class Database {
 
     public static List<Lead> loadLeadsFromDatabase() {
         Lead[] leadArray;
-        List<Lead> leadList;
+        List<Lead> leadList = null;
         try {
             Reader reader = Files.newBufferedReader(Paths.get("db/leads.json"));
             leadArray = new Gson().fromJson(reader, Lead[].class);
             leadList = Arrays.asList(leadArray);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            // throw new RuntimeException(e);
+            System.err.println("Error loading leads from database. No leads found.");
         }
         return leadList;
     }
@@ -157,13 +160,14 @@ public class Database {
 
     public static List<Opportunity> loadOpportunitiesFromDatabase() {
         Opportunity[] opportunityArray;
-        List<Opportunity> opportunityList;
+        List<Opportunity> opportunityList = null;
         try {
             Reader reader = Files.newBufferedReader(Paths.get("db/opportunities.json"));
             opportunityArray = new Gson().fromJson(reader, Opportunity[].class);
             opportunityList = Arrays.asList(opportunityArray);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            //throw new RuntimeException(e);
+            System.err.println("Error loading opportunities from database. No opportunities found.");
         }
         return opportunityList;
     }

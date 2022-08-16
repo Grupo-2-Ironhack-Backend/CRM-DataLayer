@@ -37,8 +37,8 @@ public class Main {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         List<Account> accountList = Database.loadAccountsFromDatabase();
-        accountList.add(account1);
-        Database.updateAccountsDatabase(accountList);
+        accounts.add(account1);
+        Database.updateAccountsDatabase(accounts);
         // System.out.println(gson.toJson(database.getAccountList()));
         // System.out.println(gson.toJson(database.getContactList()));
         // System.out.println(gson.toJson(database.getLeadList()));

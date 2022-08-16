@@ -21,18 +21,6 @@ that we have prepared for you to test the application.
 Having set the 'config.properties' file, you will clone our mock database from a repository and the updates 
 you make will remain permanent there as well as in your local system.
 
-## Full experience with Docker!
-
-From a Linux CLI or PowerShell:
-```bash
-docker run --rm -it -v ${PWD}/java-app_db:/db team2ih/crm
-```
-
-From Windows CMD:
-```bash
-docker run --rm -it -v %cd%/java-app_db:/db team2ih/crm
-```
-
 ## Usage
 
 Undefined
