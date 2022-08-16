@@ -2,6 +2,8 @@ package customer;
 
 public class TransformCommands extends Command{
 
+    // lead -- trust --> opportunity
+    // new contact
     public void convertLeadToOportunity(){
 
     }
@@ -11,6 +13,10 @@ public class TransformCommands extends Command{
     }
 
     public void removeLead(){
+
+    }
+
+    public void createContact() {
 
     }
 }

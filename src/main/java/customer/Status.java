@@ -1,8 +1,14 @@
 package customer;
 
 public enum Status {
-    OPEN,
-    CLOSED_WON,
-    CLOSED_LOST,
-    EXAMPLE
+    OPEN("Open"),
+    CLOSED_WON("Closed_won"),
+    CLOSED_LOST("Closed_lost"),
+    EXAMPLE("Example");
+
+    public final String statusLabel;
+
+    private Status(String statusLabel) {
+        this.statusLabel = statusLabel;
+    }
 }
