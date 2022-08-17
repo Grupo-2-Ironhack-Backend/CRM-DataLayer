@@ -7,6 +7,7 @@ public class Opportunity {
     private Contact decisionMaker;
     private ProductType productType;
     private int numberOfTrucks;
+    private Status status;
 
     public Opportunity(Contact decisionMaker, ProductType productType, int numberOfTrucks, Status status) {
         this.id = UUID.randomUUID();
@@ -51,8 +52,6 @@ public class Opportunity {
     public void setStatus(Status status) {
         this.status = status;
     }
-
-    private Status status;
 
 
 
