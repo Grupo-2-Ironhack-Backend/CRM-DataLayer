@@ -67,23 +67,39 @@ public class MainMenu {
                     break;
 
                 case "lookuplead":
-                    System.out.println("Enter ID lead to look for: ");
-                    String userLeadID = userInput.nextLine();
-
-                    Lead leadFound = db.getLeadByID(UUID.fromString(userLeadID));
-                    System.out.println(leadFound.toString());
-                    System.out.println(commandResume);
+                    while (true) {
+                        System.out.println("Enter ID lead to look for: ");
+                        String userLeadID = userInput.nextLine();
+                        try {
+                            Lead leadFound = db.getLeadByID(UUID.fromString(userLeadID));
+                            System.out.println(leadFound.toString());
+                            System.out.println(commandResume);
+                            break;
+                        } catch (Exception e) {
+                            System.out.println("Not a valid ID");
+                        }
+                    }
                     break;
 
                 case "convert":
-                    System.out.println("Enter an id to look for: ");
-                    String userLeadToConvert = userInput.nextLine();
 
-                    System.out.println("\nChoose between: HYBRID, FLATBED or BOX: ");
+                    String userLeadToConvert;
+                    while(true) {
+                        try {
+                            System.out.println("Enter an id to look for: ");
+                            userLeadToConvert = userInput.nextLine();
+                            db.getLeadByID(UUID.fromString(userLeadToConvert));
+                            break;
+                        } catch (Exception e) {
+                            System.out.println("Not a valid ID");
+                        }
+                    }
+
+                    System.out.println("\nChoose between: HYBRID, FLATBED or BOX: "); //TODO CONTROLAR ENUMS
                     ProductType product = ProductType.valueOf(userInput.nextLine());
 
                     System.out.println("\nHow many trucks?");
-                    int trucks = userInput.nextInt();
+                    int trucks = userInput.nextInt(); //TODO CONTROLAR INT
 
                     Opportunity newOp = db.convertFromLeadToOpportunity(UUID.fromString(userLeadToConvert), product, trucks);
                     System.out.println("\nA new opportunity has been created with id: " + newOp.getId());
@@ -95,7 +111,7 @@ public class MainMenu {
 
                     Activity userIndustry = null;
                     for (Activity industry : Activity.values()) {
-                        if (industryName == industry.name()) {
+                        if (industryName == industry.name()) { //TODO CONTROLAR ENUMS
                             userIndustry = industry;
                         }
                     }
