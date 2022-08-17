@@ -59,13 +59,23 @@ public class MainMenu {
                     break;
 
                 case "removelead":
-                    System.out.println("\nEnter id for the lead to remove: ");
-                    String userIdLeadToRemove = userInput.nextLine();
 
-                    db.removeLeadByID(UUID.fromString(userIdLeadToRemove));
+                    while (true) {
+                        System.out.println("\nEnter id for the lead to remove: ");
+                        String userIdLeadToRemove = userInput.nextLine();
+                        try{
+                            db.removeLeadByID(UUID.fromString(userIdLeadToRemove));
 
-                    System.out.println(commandResume);
+                            System.out.println(commandResume);
+                            break;
+
+                        }catch (Exception e){
+                            System.out.println("Not a valid id");
+                        }
+                    }
                     break;
+
+
 
                 case "showleads":
                     for (Lead lead : db.getLeadList()) {
