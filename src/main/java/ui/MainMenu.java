@@ -9,6 +9,9 @@ import dbInteraction.GitHub;
 
 public class MainMenu {
 
+    Scanner userInput;
+    Database db;
+
     private final String mainMenu = "\n\n================= Welcome to IronCRM =================\n" +
             "\nUse this tool to interact with your Lead database\n" +
             "and perform operations from them:\n\n" +
@@ -27,11 +30,13 @@ public class MainMenu {
             "removelead: removes a lead, specified by id\n" +
             "convert: converts a lead to an opportunity, in the process creates a new contact and account.\n" +
             "exit: exits the program\n";
+
+    public MainMenu() {
+        userInput = new Scanner(System.in);
+        db = new Database();
+    }
+
     public void executeCommand() {
-
-        Scanner userInput = new Scanner(System.in);
-
-        Database db = new Database();
 
         System.out.println(mainMenu);
 
@@ -41,20 +46,7 @@ public class MainMenu {
 
             switch (command) {
                 case "newlead":
-                    System.out.println("\nEnter name for the new lead: ");
-                    String leadName = userInput.nextLine();
-
-                    System.out.println("\nPhone number: ");
-                    String leadPhone = userInput.nextLine();
-
-                    System.out.println("\nEmail: ");
-                    String leadMail = userInput.nextLine();
-
-                    System.out.println("\nCompany name: ");
-                    String companyLead = userInput.nextLine();
-
-                    db.createAndAddLead(leadName, leadPhone, leadMail, companyLead);
-
+                    newLead();
                     System.out.println(commandResume);
                     break;
 
@@ -131,5 +123,21 @@ public class MainMenu {
                     break;
             }
         }
+    }
+
+    public void newLead(){
+        System.out.println("\nEnter name for the new lead: ");
+        String leadName = userInput.nextLine();
+
+        System.out.println("\nPhone number: ");
+        String leadPhone = userInput.nextLine();
+
+        System.out.println("\nEmail: ");
+        String leadMail = userInput.nextLine();
+
+        System.out.println("\nCompany name: ");
+        String companyLead = userInput.nextLine();
+
+        db.createAndAddLead(leadName, leadPhone, leadMail, companyLead);
     }
 }
