@@ -51,80 +51,21 @@ public class MainMenu {
                     break;
 
                 case "removelead":
-                    System.out.println("\nEnter id for the lead to remove: ");
-                    String userIdLeadToRemove = userInput.nextLine();
-
-                    db.removeLeadByID(UUID.fromString(userIdLeadToRemove));
-
+                    removeLead();
                     System.out.println(commandResume);
                     break;
 
                 case "showleads":
-                    for (Lead lead : db.getLeadList()) {
-                        System.out.println(lead.toString());
-                    }
+                    showLeads();
                     System.out.println(commandResume);
                     break;
 
                 case "lookuplead":
-                    while (true) {
-                        System.out.println("Enter ID lead to look for: ");
-                        String userLeadID = userInput.nextLine();
-                        try {
-                            Lead leadFound = db.getLeadByID(UUID.fromString(userLeadID));
-                            System.out.println(leadFound.toString());
-                            System.out.println(commandResume);
-                            break;
-                        } catch (Exception e) {
-                            System.out.println("Not a valid ID");
-                        }
-                    }
+                    lookuplead();
                     break;
 
                 case "convert":
-
-                    String userLeadToConvert;
-                    while(true) {
-                        try {
-                            System.out.println("Enter an id to look for: ");
-                            userLeadToConvert = userInput.nextLine();
-                            db.getLeadByID(UUID.fromString(userLeadToConvert));
-                            break;
-                        } catch (Exception e) {
-                            System.out.println("Not a valid ID");
-                        }
-                    }
-
-                    System.out.println("\nChoose between: HYBRID, FLATBED or BOX: "); //TODO CONTROLAR ENUMS
-                    ProductType product = ProductType.valueOf(userInput.nextLine());
-
-                    System.out.println("\nHow many trucks?");
-                    int trucks = userInput.nextInt(); //TODO CONTROLAR INT
-
-                    Opportunity newOp = db.convertFromLeadToOpportunity(UUID.fromString(userLeadToConvert), product, trucks);
-                    System.out.println("\nA new opportunity has been created with id: " + newOp.getId());
-
-                    System.out.println("\nCreating new account...............");
-                    System.out.println("Enter industry [Produce/Ecommerce/Manufacturing/Medical]: ");
-
-                    String industryName = userInput.nextLine();
-
-                    Activity userIndustry = null;
-                    for (Activity industry : Activity.values()) {
-                        if (industryName == industry.name()) { //TODO CONTROLAR ENUMS
-                            userIndustry = industry;
-                        }
-                    }
-
-                    System.out.println("\nEnter the city: ");
-                    String city = userInput.nextLine();
-
-                    System.out.println("\nEnter the country: ");
-                    String country = userInput.nextLine();
-
-                    db.createAndAddAccount(userIndustry, city, country);
-
-                    System.out.println("Details of the new opportunity: " + newOp.toString());
+                    convert();
                     System.out.println(commandResume);
                     break;
 
@@ -155,5 +96,79 @@ public class MainMenu {
         String companyLead = userInput.nextLine();
 
         db.createAndAddLead(leadName, leadPhone, leadMail, companyLead);
+    }
+
+    public void removeLead(){
+        System.out.println("\nEnter id for the lead to remove: ");
+        String userIdLeadToRemove = userInput.nextLine();
+
+        db.removeLeadByID(UUID.fromString(userIdLeadToRemove));
+    }
+
+    public void showLeads(){
+        for (Lead lead : db.getLeadList()) {
+            System.out.println(lead.toString());
+        }
+    }
+
+    public void lookuplead(){
+        while (true) {
+            System.out.println("Enter ID lead to look for: ");
+            String userLeadID = userInput.nextLine();
+            try {
+                Lead leadFound = db.getLeadByID(UUID.fromString(userLeadID));
+                System.out.println(leadFound.toString());
+                System.out.println(commandResume);
+                break;
+            } catch (Exception e) {
+                System.out.println("Not a valid ID");
+            }
+        }
+    }
+
+    public void convert(){
+        String userLeadToConvert;
+        while(true) {
+            try {
+                System.out.println("Enter an id to look for: ");
+                userLeadToConvert = userInput.nextLine();
+                db.getLeadByID(UUID.fromString(userLeadToConvert));
+                break;
+            } catch (Exception e) {
+                System.out.println("Not a valid ID");
+            }
+        }
+
+        System.out.println("\nChoose between: HYBRID, FLATBED or BOX: "); //TODO CONTROLAR ENUMS
+        ProductType product = ProductType.valueOf(userInput.nextLine());
+
+        System.out.println("\nHow many trucks?");
+        int trucks = userInput.nextInt(); //TODO CONTROLAR INT
+
+        Opportunity newOp = db.convertFromLeadToOpportunity(UUID.fromString(userLeadToConvert), product, trucks);
+        System.out.println("\nA new opportunity has been created with id: " + newOp.getId());
+
+        System.out.println("\nCreating new account...............");
+        System.out.println("Enter industry [Produce/Ecommerce/Manufacturing/Medical]: ");
+
+        String industryName = userInput.nextLine();
+
+        Activity userIndustry = null;
+        for (Activity industry : Activity.values()) {
+            if (industryName == industry.name()) { //TODO CONTROLAR ENUMS
+                userIndustry = industry;
+            }
+        }
+
+        System.out.println("\nEnter the city: ");
+        String city = userInput.nextLine();
+
+        System.out.println("\nEnter the country: ");
+        String country = userInput.nextLine();
+
+        db.createAndAddAccount(userIndustry, city, country);
+
+        System.out.println("Details of the new opportunity: " + newOp.toString());
+        System.out.println(commandResume);
     }
 }
