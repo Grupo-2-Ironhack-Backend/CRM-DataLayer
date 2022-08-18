@@ -2,9 +2,11 @@ package dbInteraction;
 
 import com.google.gson.Gson;
 import customer.*;
+import org.apache.commons.io.FileUtils;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -32,6 +34,7 @@ public class Database {
     private List<Contact> contactList;
     private List<Lead> leadList;
     private List<Opportunity> opportunityList;
+    private String dbPath = "/db";
 
     public Database() {
         this.accountList = DBLoader.loadAccountsFromDatabase();
@@ -39,6 +42,7 @@ public class Database {
         this.leadList = DBLoader.loadLeadsFromDatabase();
         this.opportunityList = DBLoader.loadOpportunitiesFromDatabase();
     }
+
 
 
     public List<Lead> getLeadList() {
@@ -49,36 +53,12 @@ public class Database {
         this.leadList = leadList;
     }
 
-    public Lead getLeadByID (UUID id) {
-        for (Lead lead : leadList) {
-            if (lead.getId().equals(id)) {
-                return lead;
-            }
-        }
-        return null;
-    }
-
-    public void createAndAddLead(String name, String phone, String email, String company) {
-        Lead newLead = new Lead(name, phone, email, company);
-        leadList.add(newLead);
-    }
-
-    public void removeLeadByID(UUID id) {
-        Lead leadToRemove = getLeadByID(id);
-        leadList.remove(leadToRemove);
-    }
-
     public List<Opportunity> getOpportunityList() {
         return opportunityList;
     }
 
     public void setOpportunityList(List<Opportunity> opportunityList) {
         this.opportunityList = opportunityList;
-    }
-
-    public boolean addOpportunity(Opportunity newOpportunity) {
-        opportunityList.add(newOpportunity);
-        return true;
     }
 
     public List<Contact> getContactList() {
@@ -89,11 +69,6 @@ public class Database {
         this.contactList = contactList;
     }
 
-    public boolean addContact(Contact newContact) {
-        contactList.add(newContact);
-        return true;
-    }
-
     public List<Account> getAccountList() {
         return accountList;
     }
@@ -102,24 +77,7 @@ public class Database {
         this.accountList = accountList;
     }
 
-    public void createAndAddAccount(Activity industry, String city, String country) {
-        Account newAccount = new Account(industry, city, country, this.getOpportunityList());
-        accountList.add(newAccount);
-    }
 
-    public Opportunity convertFromLeadToOpportunity(UUID id, ProductType prodType, int truckNumber) {
-        Lead leadFound = getLeadByID(id);
-
-        Contact newContact = new Contact(leadFound.getName(), leadFound.getPhoneNumber(), leadFound.getEmail(), leadFound.getCompanyName());
-        Opportunity newOpportunity = new Opportunity(newContact, prodType, truckNumber, Status.OPEN);
-
-        addContact(newContact);
-        addOpportunity(newOpportunity);
-
-        leadList.remove(leadFound);
-
-        return newOpportunity;
-    }
 
     public void exportClassToJSON(Object object) {
         Gson gson = new Gson();
