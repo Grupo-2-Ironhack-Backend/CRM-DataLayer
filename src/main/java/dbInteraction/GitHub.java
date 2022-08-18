@@ -9,6 +9,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 
+/**
+ * Comunicación con respositorio en GitHub para clonar y actualizar la base de datos.
+ */
+
 public class GitHub {
 
 
