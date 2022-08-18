@@ -76,7 +76,8 @@ public class MainMenu {
                     System.out.println(commandResume);
                     break;
 
-                case "removelead":
+                case "removelead": //TODO arreglar
+
                     System.out.println("\nEnter id for the lead to remove: ");
                     String userIdLeadToRemove = userInput.nextLine();
                     String removeLeadName = crud.getLeadByID(UUID.fromString(userIdLeadToRemove)).getName();
@@ -142,14 +143,36 @@ public class MainMenu {
                             System.out.println("Not a valid ID");
                         }
                     }
+                    ProductType product;
+                    while (true) {
+                        try {
 
-                    System.out.println("\nChoose between: HYBRID, FLATBED or BOX: "); //TODO CONTROLAR ENUMS
-                    ProductType product = ProductType.valueOf(userInput.nextLine());
+                            System.out.println("\nChoose between: HYBRID, FLATBED or BOX: ");
+                            product = ProductType.valueOf(userInput.nextLine().toUpperCase());
 
-                    System.out.println("\nHow many trucks?");
-                    int trucks = userInput.nextInt(); //TODO CONTROLAR INT
+                            break;
+                        } catch (Exception e) {
+                            System.out.println("Not a valid option");
+                        }
+                    }
 
-                    Opportunity newOp = crud.convertFromLeadToOpportunity(UUID.fromString(userLeadToConvert), product, trucks);
+                    Opportunity newOp = null;
+                    int trucks;
+                    while (true) {
+
+                        try {
+
+                            System.out.println("\nHow many trucks?");
+                            String stringTrucks = userInput.nextLine();
+                            trucks = Integer.parseInt(stringTrucks);
+
+                            break;
+                        } catch (Exception e) {
+                            System.out.println("Not a numeric value");
+                        }
+                    }
+
+                    newOp = crud.convertFromLeadToOpportunity(UUID.fromString(userLeadToConvert), product, trucks);
                     System.out.println("\nA new opportunity has been created with id: " + newOp.getId());
 
                     System.out.println("\nCreating new account...............");
@@ -158,10 +181,22 @@ public class MainMenu {
                     String industryName = userInput.nextLine();
 
                     Activity userIndustry = null;
-                    for (Activity industry : Activity.values()) {
-                        if (industryName == industry.name()) { //TODO CONTROLAR ENUMS
-                            userIndustry = industry;
+
+                    while(true){
+
+                        for (Activity industry : Activity.values()) {
+
+                        try{
+                            if (industryName == industry.name()) {
+                                userIndustry = industry;
+                                break;
+                            }
+                        }catch (Exception e){
+                            System.out.println("Not a valid value");
                         }
+                    }
+                   break;
+
                     }
 
                     System.out.println("\nEnter the city: ");
