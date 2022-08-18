@@ -1,20 +1,17 @@
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import customer.*;
-import dbInteraction.CRUD;
-import dbInteraction.Database;
 import dbInteraction.GitHub;
+import org.apache.commons.io.FileUtils;
 import ui.MainMenu;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
         //pruebasIO(); //Debería imprimir las arrays en formato JSON
+        File dbPath = new File("./db/");
+        FileUtils.deleteDirectory(dbPath);
+
         GitHub.cloneDatabase(); //La clonación necesita que el directorio db esté vacío o no exista.
         MainMenu menu = new MainMenu();
         menu.executeCommand();
@@ -22,7 +19,4 @@ public class Main {
 
     private static void pruebasIO(){ }
         /* Pruebas de importación / exportación de datos */
-
-
-
  }
