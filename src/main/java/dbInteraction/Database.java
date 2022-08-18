@@ -80,7 +80,7 @@ public class Database {
 
 
     public void exportClassToJSON(Object object) {
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String objToJSON = gson.toJson(object);
         System.out.println(objToJSON);
     }
