@@ -55,18 +55,17 @@ public class MainMenu {
                     while (true) {
                         System.out.println("\nEnter id for the lead to remove: ");
                         String userIdLeadToRemove = userInput.nextLine();
-                        try{
+                        try {
                             db.removeLeadByID(UUID.fromString(userIdLeadToRemove));
 
                             System.out.println(commandResume);
                             break;
 
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             System.out.println("Not a valid id");
                         }
                     }
                     break;
-
 
 
                 case "showleads":
@@ -94,7 +93,7 @@ public class MainMenu {
                 case "convert":
 
                     String userLeadToConvert;
-                    while(true) {
+                    while (true) {
                         try {
                             System.out.println("Enter an id to look for: ");
                             userLeadToConvert = userInput.nextLine();
@@ -105,26 +104,66 @@ public class MainMenu {
                         }
                     }
 
-                    System.out.println("\nChoose between: HYBRID, FLATBED or BOX: "); //TODO CONTROLAR ENUMS
-                    ProductType product = ProductType.valueOf(userInput.nextLine());
+                    ProductType product;
+                    while (true) {
+                        try {
+                            System.out.println("\nChoose between: HYBRID, FLATBED or BOX: ");
+                            product = ProductType.valueOf(userInput.nextLine().toUpperCase());
 
-                    System.out.println("\nHow many trucks?");
-                    int trucks = userInput.nextInt(); //TODO CONTROLAR INT
+                            break;
 
-                    Opportunity newOp = db.convertFromLeadToOpportunity(UUID.fromString(userLeadToConvert), product, trucks);
+                        } catch (Exception e) {
+                            System.out.println("Not a valid option");
+                        }
+                    }
+
+
+                    Opportunity newOp = null;
+                    int trucks;
+                    while (true) {
+
+                        try {
+                            System.out.println("\nHow many trucks?");
+                            String stringTrucks = userInput.nextLine();
+                            trucks = Integer.parseInt(stringTrucks);
+
+
+                            break;
+
+                        } catch (Exception e) {
+                            System.out.println("Not a numeric value");
+                        }
+
+                    }
+
+                    newOp = db.convertFromLeadToOpportunity(UUID.fromString(userLeadToConvert), product, trucks);
                     System.out.println("\nA new opportunity has been created with id: " + newOp.getId());
-
                     System.out.println("\nCreating new account...............");
                     System.out.println("Enter industry [Produce/Ecommerce/Manufacturing/Medical]: ");
 
-                    String industryName = userInput.nextLine();
 
+
+
+                    String industryName = userInput.nextLine();
                     Activity userIndustry = null;
-                    for (Activity industry : Activity.values()) {
-                        if (industryName == industry.name()) { //TODO CONTROLAR ENUMS
-                            userIndustry = industry;
+
+                     //TODO arreglar exception
+
+                    while (true) {
+
+                        for (Activity industry : Activity.values()) {
+                            try {
+                                if (industryName.equals(industry.activityLabel)) {
+                                    userIndustry = industry;
+                                    break;
+                                }
+                            } catch (Exception e){
+                                System.out.println("Not a valid value");
+                                }
                         }
+                        break;
                     }
+
 
                     System.out.println("\nEnter the city: ");
                     String city = userInput.nextLine();
@@ -132,10 +171,12 @@ public class MainMenu {
                     System.out.println("\nEnter the country: ");
                     String country = userInput.nextLine();
 
-                    db.createAndAddAccount(userIndustry, city, country);
 
+                    db.createAndAddAccount(userIndustry, city, country);
                     System.out.println("Details of the new opportunity: " + newOp.toString());
                     System.out.println(commandResume);
+
+
                     break;
 
                 case "exit":
