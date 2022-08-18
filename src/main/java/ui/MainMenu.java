@@ -176,27 +176,26 @@ public class MainMenu {
                     System.out.println("\nA new opportunity has been created with id: " + newOp.getId());
 
                     System.out.println("\nCreating new account...............");
-                    System.out.println("Enter industry [Produce/Ecommerce/Manufacturing/Medical]: ");
 
-                    String industryName = userInput.nextLine();
+                    String industryName;
 
                     Activity userIndustry = null;
+                    boolean x = true;
 
-                    while(true){
+                    while(x){
+                        System.out.println("Enter industry [Produce/Ecommerce/Manufacturing/Medical]: ");
+                        industryName = userInput.nextLine();
 
                         for (Activity industry : Activity.values()) {
-
-                        try{
-                            if (industryName == industry.name()) {
+                            if (industryName.equals(industry.activityLabel)) {
                                 userIndustry = industry;
+                                x = false;
                                 break;
                             }
-                        }catch (Exception e){
-                            System.out.println("Not a valid value");
                         }
-                    }
-                   break;
-
+                        if (x){
+                            System.out.println("Not a valid ID");
+                        }
                     }
 
                     System.out.println("\nEnter the city: ");
