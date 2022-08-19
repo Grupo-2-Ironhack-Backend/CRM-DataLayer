@@ -121,6 +121,10 @@ public class MainMenu {
                     System.exit(0);
                     break;
 
+                case "newsalesreps":
+                    newSalesRep();
+                    break;
+
                 default:
                     System.out.println("Not a valid option");
                     System.out.println(commandResume);
@@ -327,4 +331,9 @@ public class MainMenu {
             }
         }
     }
+
+    public void newSalesRep(){
+
+    }
+
 }
