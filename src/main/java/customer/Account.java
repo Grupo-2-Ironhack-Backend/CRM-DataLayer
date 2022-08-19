@@ -3,6 +3,10 @@ package customer;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Definition of the Account Class
+ */
+
 public class Account {
     private UUID id;
     private Activity industry;

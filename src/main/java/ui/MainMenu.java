@@ -6,8 +6,11 @@ import java.util.UUID;
 
 import customer.*;
 import dbInteraction.CRUD;
-import dbInteraction.Database;
 import dbInteraction.GitHub;
+
+/**
+ * Management of the main menu and user input commands.
+ */
 
 public class MainMenu {
 

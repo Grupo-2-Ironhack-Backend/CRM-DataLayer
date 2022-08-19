@@ -2,6 +2,10 @@ package customer;
 
 import java.util.UUID;
 
+/**
+ * Definition of Opportunity Class
+ */
+
 public class Opportunity {
     private UUID id;
     private Contact decisionMaker;

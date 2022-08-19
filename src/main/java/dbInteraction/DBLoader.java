@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Loading data from json file of the database
+ */
 public class DBLoader {
 
     public static List<Lead> loadLeadsFromDatabase() {

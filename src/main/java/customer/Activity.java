@@ -1,5 +1,9 @@
 package customer;
 
+
+/**
+ * Definition of the Activity Class
+ */
 public enum Activity {
     PRODUCE("Produce"),
     ECOMMERCE("Ecommerce"),

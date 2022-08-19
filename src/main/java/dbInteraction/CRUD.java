@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Create, read, update and delete
+ */
 public class CRUD {
 
     Database db = new Database();

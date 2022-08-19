@@ -3,6 +3,10 @@ package customer;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Definition of the list of Leads
+ */
 public class Leads {
     private List<Lead> leadList;
 

@@ -1,5 +1,9 @@
 package customer;
 
+/**
+ * Definition of status of an opportunity.
+ */
+
 public enum Status {
     OPEN("Open"),
     CLOSED_WON("Closed_won"),

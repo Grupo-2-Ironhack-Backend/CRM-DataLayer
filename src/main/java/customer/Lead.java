@@ -2,6 +2,9 @@ package customer;
 
 import java.util.UUID;
 
+/**
+ * Definition of a Lead
+ */
 
 public class Lead {
     private UUID id;

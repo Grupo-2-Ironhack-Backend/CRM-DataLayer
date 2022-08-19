@@ -3,31 +3,10 @@ package dbInteraction;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import customer.*;
-import org.apache.commons.io.FileUtils;
-
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 /**
- *
- * @author Gerard
- *
- * This class is used to interact with the database.
- * It is used to load the data from the database and to update the database.
- * You can update the database by calling the updateDatabase methods. These methods are:
- * - updateAccountsDatabase(accountList)
- * - updateContactsDatabase(contactList)
- * - updateLeadsDatabase(leadList)
- * - updateOpportunitiesDatabase(opportunityList)
- *
- * You can load the data from the database by using the Database class.
- * Ex:
- *  Database database = new Database();
- *  List<Account> accountList = database.getAccountList();
- *
- *  This program should load all data from the database right after it is started and
- *  should update the database everytime we add information to a classList.
+ * Communication with local database
  */
 
 public class Database {
