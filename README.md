@@ -2,28 +2,78 @@
 
 Delivered exercise. CRM - OOP Homework (Unit 2) (IRONHACK)
 
-<!--- ![alt text](example.jpg "Ejemplo output terminal") -->
+Welcome to the ultimate CRM (Customer Relationship Management) system. CRMs are a tool that almost every sales team uses to track prospective and existing customers through the sales process.
+
+This CRM allows us to:
+
+- Track Leads
+- Convert Leads into Opportunities
+- Associate an Opportunity with an Account.
+- Associate Contacts with an Opportunity.
+
+Leads, Contacts, Opportunities and Accounts are stored in a GitHub repository so you never loose information from your beloved customers. You also get your local copy of your updates.
+
+## Diagrams
+
+Case Diagram
+
+![Case Diagram](case-diagram.JPG "Case diagram")
+
+Class Diagram
+
+![Class Diagram](class-diagram.jpg "Class diagram")
 
 ## How to try it
 
-This application is a CRM (Customer Relationship Management) system.
+You just need to run the program and choose the option you need.
 You can interact with commands like:
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+<table border="0">
+ <tr style="border: none!important;">
+    <td style="border: none!important;">
+showleads: <br>
+showopportunities: <br>
+showcontacts: <br>
+showaccounts: <br>
+lookuplead: <br>
+newlead: <br>
+removelead: <br>
+convert: <br>
+close-lost: <br>
+close-won: <br>
+exit: <br>
+</td>
+    <td style="border: none!important;">
+list of leads<br>
+list of opportunities<br>
+list of contacts<br>
+list of accounts<br>
+specific lead by id<br>
+create a new lead<br>
+removes a lead<br>
+converts a lead to an opportunity<br>
+opportunity status changed to lost sale<br>
+opportunity status changed to won sale<br>
+exits the program<br>
+</td>
+ </tr>
+</table>
 
 ## Requirements
 
-You may want to keep a copy of your database stored in a remote repository.
+First of all you need to clone the code and include the Access Token that we have sent you so your updates become persistant in a remote repository. The Access Token needs to be pasted in the field 'JAVA_APP_PASSWORD' in the resources/config.properties file.
 
-In order to do so, you can try by configuring the file 'config.properties' in the 'resources' folder.
-Please, ask us for the access token so you can complete the 'config.properties' file with the credentials
-that we have prepared for you to test the application.
-
-Having set the 'config.properties' file, you will clone our mock database from a repository and the updates 
-you make will remain permanent there as well as in your local system.
+After that you have two options to run the code:
+- Option 1: You need to have IntelliJ in your local system to clone this repository and run it.
+- Option 2: Alternatively, you can build a Docker image by using the Dockerfile included in the repository and run your own image.
 
 ## Usage
 
-Undefined
+You just need to type the command you need, press ENTER and follow the given instructions.
+
+Here there is an example:
+
+![example](example.gif "Example CLI")
 
 ## Contributing
 

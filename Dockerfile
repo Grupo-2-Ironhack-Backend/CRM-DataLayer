@@ -1,10 +1,12 @@
 FROM maven:3.8.6 AS builder
 WORKDIR /app
 COPY pom.xml .
+RUN mvn -e -B dependency:resolve
 COPY src ./src
 RUN mvn -e -B package
-RUN mv target/homeworkCRM2-1.0-SNAPSHOT.jar target/app.jar
+RUN rm target/original*
 
 FROM openjdk:19-jdk-alpine3.16
-COPY --from=builder /app/target/app.jar .
+ARG JAR_FILE=/app/target/*.jar
+COPY --from=builder ${JAR_FILE} app.jar
 CMD ["java", "-jar", "app.jar"]

@@ -1,5 +1,8 @@
 package customer;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -64,12 +67,8 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account{" +
-                "id=" + id +
-                ", industry=" + industry +
-                ", city='" + city + '\'' +
-                ", country='" + country + '\'' +
-                ", opportunities=" + opportunities +
-                '}';
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson.toJson(this) + "\n" + "    ────────────────────────────";
+
     }
 }

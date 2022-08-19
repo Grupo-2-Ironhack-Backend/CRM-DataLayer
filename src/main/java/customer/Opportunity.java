@@ -1,5 +1,8 @@
 package customer;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.util.UUID;
 
 /**
@@ -65,12 +68,7 @@ public class Opportunity {
 
     @Override
     public String toString() {
-        return "Opportunity{" +
-                "id=" + id +
-                ", decisionMaker=" + decisionMaker +
-                ", porductType=" + productType +
-                ", numberOfTrucks=" + numberOfTrucks +
-                ", status=" + status +
-                '}';
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson.toJson(this) + "\n" + "   ────────────────────────────";
     }
 }
