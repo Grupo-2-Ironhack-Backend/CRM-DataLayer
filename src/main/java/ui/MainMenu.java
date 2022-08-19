@@ -110,6 +110,10 @@ public class MainMenu {
                     break;
 
                 case "exit":
+                    CRUD.updateLeadsDatabase(crud.getLeadList());
+                    CRUD.updateAccountsDatabase(crud.getAccountList());
+                    CRUD.updateContactsDatabase(crud.getContactList());
+                    CRUD.updateOpportunitiesDatabase(crud.getOpportunityList());
                     GitHub.push();
                     System.exit(0);
                     break;
@@ -240,7 +244,6 @@ public class MainMenu {
         System.out.println("\nA new opportunity has been created with id: " + newOp.getId());
 
         System.out.println("\nCreating new account...............");
-        System.out.println("Enter industry [Produce/Ecommerce/Manufacturing/Medical]: ");
 
         String industryName;
 
