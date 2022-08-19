@@ -61,7 +61,7 @@ exits the program<br>
 
 ## Requirements
 
-First of all you need to clone the code and include the Access Token that we have sent you so your updates become persistant in a remote repository. The Access Token needs to be pasted in the field 'JAVA_APP_PASSWORD' in the resources/config.properties file.
+First of all you need to clone the code and include the Access Token that we have sent you so your updates become persistent in a remote repository. The Access Token needs to be pasted in the field 'JAVA_APP_PASSWORD' in the resources/config.properties file.
 
 After that you have two options to run the code:
 - Option 1: You need to have IntelliJ in your local system to clone this repository and run it.
