@@ -54,10 +54,19 @@ public class MainMenu {
 
         System.out.println(mainMenu);
 
-        while (true) {
-            String userCommand = userInput.nextLine();
-            String command = CommandInterpreter.InputToCommand(userCommand);
 
+        while (true) {
+
+
+            String userCommand = null;
+            try {
+                userCommand = userInput.nextLine();
+                String command = CommandInterpreter.InputToCommand(userCommand);
+            } catch (Exception e) {
+                System.out.println("Not a valid option");
+            }
+
+            String command = CommandInterpreter.InputToCommand(userCommand);
             switch (command) {
                 case "newlead":
                     System.out.println("\nEnter name for the new lead: ");
@@ -78,13 +87,28 @@ public class MainMenu {
 
                 case "removelead": //TODO arreglar
 
-                    System.out.println("\nEnter id for the lead to remove: ");
-                    String userIdLeadToRemove = userInput.nextLine();
-                    String removeLeadName = crud.getLeadByID(UUID.fromString(userIdLeadToRemove)).getName();
-                    crud.removeLeadByID(UUID.fromString(userIdLeadToRemove));
+                    while (true) {
+                        System.out.println("\nEnter id for the lead to remove: ");
+                        String userIdLeadToRemove = userInput.nextLine();
 
-                    System.out.println(String.format("Lead %s removed from system.", removeLeadName));
-                    System.out.println(commandResume);
+                        try {
+
+                            crud.removeLeadByID(UUID.fromString(userIdLeadToRemove));
+                            String removeLeadName = crud.getLeadByID(UUID.fromString(userIdLeadToRemove)).getName();
+                            System.out.println(String.format("Lead %s removed from system.", removeLeadName));
+                            System.out.println(commandResume);
+
+                            break;
+                        } catch (Exception e) {
+                            System.out.println("Not a valid id");
+                        }
+
+
+
+                    }
+                    //System.out.println("\nEnter id for the lead to remove: ");
+
+
                     break;
 
                 case "showleads":
@@ -133,7 +157,7 @@ public class MainMenu {
                 case "convert":
 
                     String userLeadToConvert;
-                    while(true) {
+                    while (true) {
                         try {
                             System.out.println("Enter an id to look for: ");
                             userLeadToConvert = userInput.nextLine();
@@ -182,20 +206,20 @@ public class MainMenu {
 
                     Activity userIndustry = null;
 
-                    while(true){
+                    while (true) {
 
                         for (Activity industry : Activity.values()) {
 
-                        try{
-                            if (industryName == industry.name()) {
-                                userIndustry = industry;
-                                break;
+                            try {
+                                if (industryName == industry.name()) {
+                                    userIndustry = industry;
+                                    break;
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Not a valid value");
                             }
-                        }catch (Exception e){
-                            System.out.println("Not a valid value");
                         }
-                    }
-                   break;
+                        break;
 
                     }
 
@@ -219,7 +243,7 @@ public class MainMenu {
                         System.out.println(opportunity.toString());
                     }
 
-                    while(true) {
+                    while (true) {
                         try {
                             System.out.println("Enter an id to look for: ");
                             String userOpportunityToChangeState = userInput.nextLine();
@@ -242,7 +266,7 @@ public class MainMenu {
                         System.out.println(opportunity.toString());
                     }
 
-                    while(true) {
+                    while (true) {
                         try {
                             System.out.println("Enter an id to look for: ");
                             String userOpportunityToChangeState = userInput.nextLine();
