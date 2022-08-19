@@ -54,8 +54,18 @@ public class MainMenu {
 
         System.out.println(mainMenu);
 
+
         while (true) {
-            String userCommand = userInput.nextLine();
+
+
+            String userCommand = null;
+            try {
+                userCommand = userInput.nextLine();
+                String command = CommandInterpreter.InputToCommand(userCommand);
+            } catch (Exception e) {
+                System.out.println("Not a valid option");
+            }
+
             String command = CommandInterpreter.InputToCommand(userCommand);
 
             switch (command) {
@@ -78,13 +88,28 @@ public class MainMenu {
 
                 case "removelead": //TODO arreglar
 
-                    System.out.println("\nEnter id for the lead to remove: ");
-                    String userIdLeadToRemove = userInput.nextLine();
-                    String removeLeadName = crud.getLeadByID(UUID.fromString(userIdLeadToRemove)).getName();
-                    crud.removeLeadByID(UUID.fromString(userIdLeadToRemove));
+                    while (true) {
+                        System.out.println("\nEnter id for the lead to remove: ");
+                        String userIdLeadToRemove = userInput.nextLine();
 
-                    System.out.println(String.format("Lead %s removed from system.", removeLeadName));
-                    System.out.println(commandResume);
+                        try {
+
+                            crud.removeLeadByID(UUID.fromString(userIdLeadToRemove));
+                            String removeLeadName = crud.getLeadByID(UUID.fromString(userIdLeadToRemove)).getName();
+                            System.out.println(String.format("Lead %s removed from system.", removeLeadName));
+                            System.out.println(commandResume);
+
+                            break;
+                        } catch (Exception e) {
+                            System.out.println("Not a valid id");
+                        }
+
+
+
+                    }
+                    //System.out.println("\nEnter id for the lead to remove: ");
+
+
                     break;
 
                 case "showleads":
@@ -176,6 +201,7 @@ public class MainMenu {
                     System.out.println("\nA new opportunity has been created with id: " + newOp.getId());
 
                     System.out.println("\nCreating new account...............");
+                    System.out.println("Enter industry [Produce/Ecommerce/Manufacturing/Medical]: ");
 
                     String industryName;
 
