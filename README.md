@@ -17,7 +17,7 @@ Leads, Contacts, Opportunities and Accounts are stored in a GitHub repository so
 
 Case Diagram
 
-![Case Diagram](case-diagram.JPG "Case diagram")
+![Case Diagram](case-diagram.jpg "Case diagram")
 
 Class Diagram
 
