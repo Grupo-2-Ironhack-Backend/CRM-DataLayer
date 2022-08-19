@@ -143,10 +143,9 @@ public class MainMenu {
         while (true) {
             System.out.println("\nEnter id for the lead to remove: ");
             String userIdLeadToRemove = userInput.nextLine();
-
             try {
-                crud.removeLeadByID(UUID.fromString(userIdLeadToRemove));
                 String removeLeadName = crud.getLeadByID(UUID.fromString(userIdLeadToRemove)).getName();
+                crud.removeLeadByID(UUID.fromString(userIdLeadToRemove));
                 System.out.println(String.format("Lead %s removed from system.", removeLeadName));
                 System.out.println(commandResume);
                 break;
