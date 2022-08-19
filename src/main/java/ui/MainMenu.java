@@ -252,10 +252,11 @@ public class MainMenu {
 
         while(x){
             System.out.println("Enter industry [Produce/Ecommerce/Manufacturing/Medical]: ");
-            industryName = userInput.nextLine();
+            industryName = CommandInterpreter.InputToCommand(userInput.nextLine());
+
 
             for (Activity industry : Activity.values()) {
-                if (industryName.equals(industry.activityLabel)) {
+                if (industryName.equals(industry.activityLabel.toLowerCase())) {
                     userIndustry = industry;
                     x = false;
                     break;
