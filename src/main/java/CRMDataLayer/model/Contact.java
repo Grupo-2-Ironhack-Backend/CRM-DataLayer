@@ -2,7 +2,7 @@ package CRMDataLayer.model;
 
 
 /**
- * Definition of the Contact Class
+ * Definition of the ContactRepository Class
  */
 public class Contact extends Lead {
     public Contact(String name, String phoneNumber, String email, String companyName) {

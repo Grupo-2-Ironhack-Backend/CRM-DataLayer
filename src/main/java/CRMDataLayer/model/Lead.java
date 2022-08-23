@@ -1,20 +1,33 @@
 package CRMDataLayer.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.util.UUID;
 
 /**
  * Definition of a Lead
  */
-
+@Entity
 public class Lead {
+    @Id
     private UUID id;
     private String name;
     private String phoneNumber;
     private String email;
     private String companyName;
+
+    @ManyToOne
+    @JsonIgnore
+    private SalesRep salesRep;
+
+    public Lead() {
+    }
+
     public Lead(String name, String phoneNumber, String email, String companyName) {
         this.id = UUID.randomUUID();
         this.name = name;
