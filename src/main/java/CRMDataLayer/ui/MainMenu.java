@@ -3,9 +3,14 @@ package CRMDataLayer.ui;
 import java.util.Scanner;
 import java.util.UUID;
 
-import CRMDataLayer.customer.*;
 import CRMDataLayer.dbInteraction.CRUD;
 import CRMDataLayer.dbInteraction.GitHub;
+import CRMDataLayer.enums.Activity;
+import CRMDataLayer.enums.ProductType;
+import CRMDataLayer.model.Account;
+import CRMDataLayer.model.Contact;
+import CRMDataLayer.model.Lead;
+import CRMDataLayer.model.Opportunity;
 
 /**
  * Management of the main menu and user input commands.
@@ -20,12 +25,13 @@ public class MainMenu {
             "\nUse this tool to interact with your Lead database\n" +
             "and perform operations from them:\n\n" +
             "\t\"showleads\": shows a list of all leads presents in database.\n" +
-            "\t\"showopportunities\": shows a list of all opportunities presents in database.\n" +
+            "\t\"showopportunities\": shows a list of all Opportunities presents in database.\n" +
             "\t\"showcontacts\": shows a list of all contacts presents in database.\n" +
             "\t\"showaccounts\": shows a list of all accounts presents in database.\n" +
             "\t\"lookuplead\": returns an specific lead, searched by id.\n" +
             "\t\"newlead\": creates a new lead by asking for the new info.\n" +
             "\t\"removelead\": removes the lead associated with specified id.\n" +
+            "\t\"New SalesRep\": \n" +
             "\t\"convert\": converts a lead into an opportunity and creates \n" +
             "\t\t\tits associated contact and account.\n" +
             "\t\"close-lost\": changes opportunity status to \"CLOSED-LOST\" to\n" +
@@ -36,7 +42,7 @@ public class MainMenu {
 
     private final String commandResume = "\n\n================= Cheatsheet: =================\n\n" +
             "showleads: list of leads\n" +
-            "showopportunities: list of opportunities\n" +
+            "showopportunities: list of Opportunities\n" +
             "showcontacts: list of contacts\n" +
             "showaccounts: list of accounts\n" +
             "lookuplead: specific lead by id\n" +
@@ -45,6 +51,7 @@ public class MainMenu {
             "convert: converts a lead to an opportunity\n" +
             "close-lost: opportunity status changed to lost sale\n" +
             "close-won: opportunity status changed to won sale\n" +
+            "newsalesrep: create a new salesrep\n" +
             "exit: exits the program\n";
 
     public MainMenu() {
@@ -109,6 +116,10 @@ public class MainMenu {
 
                 case "close-won":
                     closeWon();
+                    break;
+
+                case "newsalesrep":
+                    newSalesRep();
                     break;
 
                 case "exit":
@@ -287,7 +298,7 @@ public class MainMenu {
 
     public void closeLost(){
         System.out.println("Change an opportunity state to \"closed as lost\".\n" +
-                "Here is the list of available opportunities:\n");
+                "Here is the list of available Opportunities:\n");
 
         for (Opportunity opportunity : crud.getOpportunityList()) {
             System.out.println(opportunity.toString());
@@ -310,7 +321,7 @@ public class MainMenu {
 
     public void closeWon(){
         System.out.println("Change an opportunity state to \"closed as won\".\n" +
-                "Here is the list of available opportunities:\n");
+                "Here is the list of available Opportunities:\n");
 
         for (Opportunity opportunity : crud.getOpportunityList()) {
             System.out.println(opportunity.toString());

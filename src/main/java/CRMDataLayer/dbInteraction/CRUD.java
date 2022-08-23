@@ -1,8 +1,14 @@
 package CRMDataLayer.dbInteraction;
 
+import CRMDataLayer.enums.Activity;
+import CRMDataLayer.enums.ProductType;
+import CRMDataLayer.enums.Status;
+import CRMDataLayer.model.Account;
+import CRMDataLayer.model.Contact;
+import CRMDataLayer.model.Lead;
+import CRMDataLayer.model.Opportunity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import CRMDataLayer.customer.*;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -114,7 +120,7 @@ public class CRUD {
 
     public static void updateOpportunitiesDatabase(List<Opportunity> opportunityList) {
         try {
-            FileWriter writer = new FileWriter("db/opportunities.json");
+            FileWriter writer = new FileWriter("db/Opportunities.json");
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             writer.write(gson.toJson(opportunityList));
             writer.close();

@@ -1,5 +1,7 @@
 package CRMDataLayer.customer;
 
+import CRMDataLayer.model.Lead;
+import CRMDataLayer.ns.Leads;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

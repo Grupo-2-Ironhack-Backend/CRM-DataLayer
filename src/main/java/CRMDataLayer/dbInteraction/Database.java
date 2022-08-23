@@ -1,8 +1,12 @@
 package CRMDataLayer.dbInteraction;
 
+import CRMDataLayer.model.Account;
+import CRMDataLayer.model.Contact;
+import CRMDataLayer.model.Lead;
+import CRMDataLayer.model.Opportunity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import CRMDataLayer.customer.*;
+
 import java.util.List;
 
 /**

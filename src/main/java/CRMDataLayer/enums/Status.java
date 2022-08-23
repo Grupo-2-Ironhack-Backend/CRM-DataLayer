@@ -1,4 +1,4 @@
-package CRMDataLayer.customer;
+package CRMDataLayer.enums;
 
 /**
  * Definition of status of an opportunity.

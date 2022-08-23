@@ -1,8 +1,10 @@
-package CRMDataLayer.customer;
+package CRMDataLayer.model;
 
+import CRMDataLayer.enums.Activity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import javax.persistence.*;
 import java.util.List;
 import java.util.UUID;
 
@@ -11,7 +13,9 @@ import java.util.UUID;
  */
 
 public class Account {
+
     private UUID id;
+    @Enumerated(EnumType.STRING)
     private Activity industry;
     private String city; // This could also be a very long string of cities
     private String country;

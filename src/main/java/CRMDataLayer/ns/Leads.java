@@ -1,4 +1,6 @@
-package CRMDataLayer.customer;
+package CRMDataLayer.ns;
+
+import CRMDataLayer.model.Lead;
 
 import java.util.ArrayList;
 import java.util.List;

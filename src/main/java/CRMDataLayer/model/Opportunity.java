@@ -1,5 +1,8 @@
-package CRMDataLayer.customer;
+package CRMDataLayer.model;
 
+import CRMDataLayer.enums.ProductType;
+import CRMDataLayer.enums.Status;
+import CRMDataLayer.model.Contact;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

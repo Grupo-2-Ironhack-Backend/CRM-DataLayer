@@ -1,5 +1,9 @@
 package CRMDataLayer.customer;
 
+import CRMDataLayer.enums.ProductType;
+import CRMDataLayer.enums.Status;
+import CRMDataLayer.model.Contact;
+import CRMDataLayer.model.Opportunity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

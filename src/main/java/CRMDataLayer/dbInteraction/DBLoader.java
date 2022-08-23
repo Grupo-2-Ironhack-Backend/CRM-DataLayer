@@ -1,7 +1,10 @@
 package CRMDataLayer.dbInteraction;
 
+import CRMDataLayer.model.Account;
+import CRMDataLayer.model.Contact;
+import CRMDataLayer.model.Lead;
+import CRMDataLayer.model.Opportunity;
 import com.google.gson.Gson;
-import CRMDataLayer.customer.*;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -65,7 +68,7 @@ public class DBLoader {
         List<Opportunity> opportunityList;
 
         try {
-            Reader reader = Files.newBufferedReader(Paths.get("db/opportunities.json"));
+            Reader reader = Files.newBufferedReader(Paths.get("db/Opportunities.json"));
             opportunityArray = new Gson().fromJson(reader, Opportunity[].class);
             opportunityList = new ArrayList<>(Arrays.asList(opportunityArray));
         } catch (IOException e) {

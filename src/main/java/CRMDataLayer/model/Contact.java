@@ -1,4 +1,4 @@
-package CRMDataLayer.customer;
+package CRMDataLayer.model;
 
 
 /**

@@ -1,4 +1,4 @@
-package CRMDataLayer.customer;
+package CRMDataLayer.enums;
 
 /**
  * Definition of the type of a product
