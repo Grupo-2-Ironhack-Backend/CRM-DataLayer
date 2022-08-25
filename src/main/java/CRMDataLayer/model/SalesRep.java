@@ -1,50 +1,32 @@
 package CRMDataLayer.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.List;
-import java.util.UUID;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.lang.NonNull;
+
+import javax.persistence.*;
+
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 
 @Entity
+@Table(name="sales_rep")
 public class SalesRep {
     @Id
-    private UUID id;
+    private Long id;
+    @Column(name="name", length = 50)
+    @NonNull
     private String name;
 
-    @OneToMany(mappedBy = "salesRep")
-    private List<Lead> leadList;
+    @OneToOne
+    @JoinColumn(name="salesRep")
+    @JsonIgnore
+    private Lead _lead;
 
-    public SalesRep() {
-    }
-
-    public SalesRep(String name, List<Lead> leadList) {
-        this.id = UUID.randomUUID();
+    public SalesRep(String name) {
         this.name = name;
-        this.leadList = leadList;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Lead> getLeadList() {
-        return leadList;
-    }
-
-    public void setLeadList(List<Lead> leadList) {
-        this.leadList = leadList;
     }
 }
