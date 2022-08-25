@@ -1,3 +1,5 @@
+// TODO: fix shutdown
+
 package CRMDataLayer.ui;
 
 import java.util.List;
@@ -5,7 +7,9 @@ import java.util.Scanner;
 
 import CRMDataLayer.model.Lead;
 import CRMDataLayer.service.LeadService;
+import org.springframework.context.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,6 +20,9 @@ import org.springframework.stereotype.Service;
 public class MainMenu {
     @Autowired
     LeadService leadService;
+
+    @Autowired
+     private ApplicationContext context;
 
     Scanner userInput;
     private final String reportingMenuResume = "\n\n\tReporting By SalesRep\n\n" +
@@ -105,6 +112,14 @@ public class MainMenu {
 
     public MainMenu() {
         userInput = new Scanner(System.in);
+    }
+
+    public void initiateAppShutdown (int returnCode) {
+        SpringApplication.exit(context, () -> returnCode);
+    }
+
+    public void shutdown() {
+        initiateAppShutdown(0);
     }
 
     public void executeCommand() {
@@ -301,12 +316,10 @@ public class MainMenu {
                     break;
 
                 case "exit":
-                    System.exit(0);
-                    break;
+                    shutdown();
 
                 default:
                     System.out.println("Not a valid option");
-
                     break;
             }
             System.out.println(commandResume);
@@ -325,6 +338,8 @@ public class MainMenu {
 
         System.out.println("\nCompany name: ");
         String companyLead = userInput.nextLine();
+
+        this.leadService.addNew(new Lead(leadName, leadPhone, leadMail, companyLead));
     }
 
     public void removeLead() {

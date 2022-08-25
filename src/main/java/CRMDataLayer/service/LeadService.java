@@ -19,4 +19,8 @@ public class LeadService {
         }
         return null;
     }
+
+    public Lead addNew(Lead newLead) {
+        return this.leadRepository.save(newLead);
+    }
 }
