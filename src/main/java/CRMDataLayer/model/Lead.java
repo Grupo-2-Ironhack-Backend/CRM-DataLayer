@@ -4,75 +4,41 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import java.util.UUID;
+import javax.persistence.*;
+
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 
 /**
  * Definition of a Lead
  */
 @Entity
+@Table(name="_lead")
 public class Lead {
     @Id
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @Column(name="name", length = 50)
     private String name;
+    @Column(name="phone", length=20)
     private String phoneNumber;
+    @Column(name="email")
     private String email;
+    @Column(name="company_name")
     private String companyName;
 
-    @ManyToOne
+    @OneToOne(mappedBy="_lead")
     @JsonIgnore
     private SalesRep salesRep;
 
-    public Lead() {
-    }
-
     public Lead(String name, String phoneNumber, String email, String companyName) {
-        this.id = UUID.randomUUID();
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.companyName = companyName;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
 

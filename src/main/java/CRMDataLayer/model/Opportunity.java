@@ -2,71 +2,49 @@ package CRMDataLayer.model;
 
 import CRMDataLayer.enums.ProductType;
 import CRMDataLayer.enums.Status;
-import CRMDataLayer.model.Contact;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.util.UUID;
+import lombok.*;
+
+import javax.persistence.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 
 /**
  * Definition of Opportunity Class
  */
-
+@Entity
+@Table(name="opportunity")
 public class Opportunity {
-    private UUID id;
-    private Contact decisionMaker;
+    @Id
+    private Long id;
+    /*@Column(name="decision_maker")
+    @NonNull
+    private Contact decisionMaker;*/
+    @Column(name="product_type")
+    @NonNull
     private ProductType productType;
+    @Column(name="quantity")
     private int numberOfTrucks;
+    @Column(name="status")
     private Status status;
 
-    public Opportunity(Contact decisionMaker, ProductType productType, int numberOfTrucks, Status status) {
-        this.id = UUID.randomUUID();
-        this.decisionMaker = decisionMaker;
+    @OneToOne
+    @JoinColumn(name="opportunity")
+    private Contact decisionMaker;
+
+    @ManyToOne
+    @JoinColumn(name="opportunities")
+    private Account account;
+
+    public Opportunity(ProductType productType, int numberOfTrucks, Status status) {
         this.productType = productType;
         this.numberOfTrucks = numberOfTrucks;
         this.status = status;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public Contact getDecisionMaker() {
-        return decisionMaker;
-    }
-
-    public void setDecisionMaker(Contact decisionMaker) {
-        this.decisionMaker = decisionMaker;
-    }
-
-    public ProductType getProductType() {
-        return productType;
-    }
-
-    public void setProductType(ProductType productType) {
-        this.productType = productType;
-    }
-
-    public void setNumberOfTrucks(int numberOfTrucks) {
-        this.numberOfTrucks = numberOfTrucks;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-
-
-    public int getNumberOfTrucks() {
-        return numberOfTrucks;
     }
 
     @Override
