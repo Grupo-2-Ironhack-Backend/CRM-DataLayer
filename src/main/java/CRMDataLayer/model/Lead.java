@@ -1,6 +1,5 @@
 package CRMDataLayer.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -32,7 +31,7 @@ public class Lead {
     private String companyName;
 
     @ManyToOne
-    @JsonIgnore
+    @JoinColumn(name="sales_rep")
     private SalesRep salesRep;
 
     public Lead(String name, String phoneNumber, String email, String companyName) {
@@ -42,4 +41,9 @@ public class Lead {
         this.companyName = companyName;
     }
 
+    @Override
+    public String toString() {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson.toJson(this) + "\n" + "  ────────────────────────────";
+    }
 }
