@@ -12,7 +12,6 @@
 package CRMDataLayer.model;
 
 import CRMDataLayer.enums.Activity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -26,9 +25,6 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 
-/**
- * Definition of the Account Class
- */
 @Entity
 @Table(name="account")
 public class Account {
