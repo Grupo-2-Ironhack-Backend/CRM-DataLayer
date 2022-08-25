@@ -1,3 +1,13 @@
+/**
+ * A contact is a lead which is being tracked in
+ * the crm database. At this point, the lead has
+ * showed an specific interest for a product, this
+ * creates a sales opportunity, taking the lead
+ * info to create the contact entity. The contact
+ * and its related opportunity are stored in an
+ * account.
+ */
+
 package CRMDataLayer.model;
 
 import javax.persistence.*;
@@ -9,9 +19,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 
-/**
- * Definition of the ContactRepository Class
- */
 @Entity
 @Table(name="contact")
 public class Contact {
