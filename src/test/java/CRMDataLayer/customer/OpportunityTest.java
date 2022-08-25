@@ -16,7 +16,7 @@ public class OpportunityTest {
     @BeforeEach
     void setUp() {
         contact = new Contact( "name",  "phoneNumber",  "email",  "companyName");
-        opportunity = new Opportunity(contact, ProductType.HYBRID, 2, Status.OPEN);
+        opportunity = new Opportunity(ProductType.HYBRID, 2, Status.OPEN);
     }
 
 

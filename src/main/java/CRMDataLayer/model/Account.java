@@ -1,78 +1,60 @@
 package CRMDataLayer.model;
 
 import CRMDataLayer.enums.Activity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
+
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 
 /**
  * Definition of the Account Class
  */
-
+@Entity
+@Table(name="account")
 public class Account {
 
-    private UUID id;
+    @Id
+    private Long id;
     @Enumerated(EnumType.STRING)
+    @Column(name="industry")
     private Activity industry;
-    private String city; // This could also be a very long string of cities
-    private String country;
+    @Column(name="city")
+    private String city; // This could also be a very long string of cities or an enum
+    @Column(name="country")
+    private String country; // same as city case
+
+    // 1 account holds n opportunities -->
+    // 1 opportunity holds 1 decisionMaker -->
+    // 1 account holds n decisionMaker (contact)
+    @OneToMany(mappedBy="account")
+    @JsonIgnore
     private List<Opportunity> opportunities;
 
-    public Account(Activity industry, String city, String country, List<Opportunity> opportunities) {
-        this.id = UUID.randomUUID();
+    @OneToMany(mappedBy="account")
+    @JsonIgnore
+    private List<Contact> contacts;
+
+    public Account(Activity industry, String city, String country) {
         this.industry = industry;
         this.city = city;
         this.country = country;
-        this.opportunities = opportunities;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public Activity getIndustry() {
-        return industry;
-    }
-
-    public void setIndustry(Activity industry) {
-        this.industry = industry;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public List<Opportunity> getOpportunities() {
-        return opportunities;
-    }
-
-    public void setOpportunities(List<Opportunity> opportunities) {
-        this.opportunities = opportunities;
+        this.opportunities = new ArrayList<>();
+        this.contacts = new ArrayList<>();
     }
 
     @Override
     public String toString() {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         return gson.toJson(this) + "\n" + "    ────────────────────────────";
-
     }
 }

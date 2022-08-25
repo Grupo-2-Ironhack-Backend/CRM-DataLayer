@@ -23,9 +23,9 @@ public class AccountTest {
     @BeforeEach
     void setUp() {
         contact = new Contact( "name",  "phoneNumber",  "email",  "companyName");
-        opportunity = new Opportunity(contact, ProductType.HYBRID, 2, Status.OPEN);
+        opportunity = new Opportunity(ProductType.HYBRID, 2, Status.OPEN);
         opportunityList = new ArrayList<>(List.of(opportunity));
-        account = new Account(Activity.MEDICAL, "bcn", "esp", opportunityList);
+        account = new Account(Activity.MEDICAL, "bcn", "esp");
     }
 
 
