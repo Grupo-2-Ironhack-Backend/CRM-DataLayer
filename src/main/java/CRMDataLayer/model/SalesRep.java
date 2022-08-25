@@ -18,15 +18,16 @@ import java.util.List;
 @Table(name="sales_rep")
 public class SalesRep {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name="name", length = 50)
     @NonNull
     private String name;
 
-    @OneToMany(mappedBy="salesRep")
+    @OneToMany(mappedBy="salesRep", cascade = CascadeType.ALL)
     private List<Lead> leads;
 
-    @OneToMany(mappedBy="salesRep")
+    @OneToMany(mappedBy="salesRep", cascade = CascadeType.ALL)
     private List<Opportunity> opportunities;
 
     public SalesRep(String name) {
