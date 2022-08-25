@@ -26,6 +26,9 @@ public class SalesRep {
     @OneToMany(mappedBy="salesRep")
     private List<Lead> leads;
 
+    @OneToMany(mappedBy="salesRep")
+    private List<Opportunity> opportunities;
+
     public SalesRep(String name) {
         this.name = name;
     }
@@ -33,5 +36,6 @@ public class SalesRep {
     public SalesRep() {
         super();
         leads = new ArrayList<Lead>();
+        opportunities = new ArrayList<Opportunity>();
     }
 }

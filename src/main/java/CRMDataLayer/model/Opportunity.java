@@ -1,3 +1,12 @@
+/**
+ * An opportunity represents an specific interest
+ * from a lead in one of our products. From the moment
+ * a lead shows an specific interest it is
+ * converted to a contact and attached to the
+ * opportunity, a sales representative who
+ * was attached to the preceeding lead is attached
+ * too.
+ */
 package CRMDataLayer.model;
 
 import CRMDataLayer.enums.ProductType;
@@ -14,9 +23,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 
-/**
- * Definition of Opportunity Class
- */
 @Entity
 @Table(name="opportunity")
 public class Opportunity {
@@ -34,7 +40,11 @@ public class Opportunity {
     @JoinColumn(name="opportunity")
     private Contact decisionMaker;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="sales_representative")
+    private SalesRep salesRep;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="opportunities")
     private Account account;
 

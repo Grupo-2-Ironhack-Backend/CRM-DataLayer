@@ -12,27 +12,32 @@ import org.springframework.context.annotation.Bean;
 public class CrmDataLayerApplication {
 	@Autowired
 	LeadRepository leadRepository;
+
+	@Autowired
+	MainMenu menu;
+
 	public static void main(String[] args) {
 		SpringApplication.run(CrmDataLayerApplication.class, args);
 	}
 
 	@Bean
 	public void run() {
-
+		/*
 		Lead lead1 = leadRepository.save(new Lead("Rogers", "5555555555", "cap@ojsedn.com", "USA Inc."));
 		Lead lead2 = leadRepository.save(new Lead("Stark", "5555555555", "cubatas@ojsedn.com", "Extremis Foods"));
 		Lead lead3 = leadRepository.save(new Lead("Banner", "5555555555", "rads@ojsedn.com", "Gamma Ray"));
 		Lead lead4 = leadRepository.save(new Lead("Romanoff", "5555555555", "widow_not_an_os@ojsedn.com", "Red Room Assasins Ltd."));
 		Lead lead5 = leadRepository.save(new Lead("Barton", "5555555555", "arrows@ojsedn.com", "Pizza Dog"));
 		Lead lead6 = leadRepository.save(new Lead("Odinson", "5555555555", "strongest_avenger@ojsedn.com", "Asgard Tours"));
-		System.out.println(lead1.toString());
-		System.out.println(lead2.toString());
-		System.out.println(lead3.toString());
-		System.out.println(lead4.toString());
-		System.out.println(lead5.toString());
-		System.out.println(lead6.toString());
-		MainMenu mainMenu = new MainMenu();
-		mainMenu.executeCommand();
+		System.out.println(lead1);
+		System.out.println(lead2);
+		System.out.println(lead3);
+		System.out.println(lead4);
+		System.out.println(lead5);
+		System.out.println(lead6);
+		*/
+
+		menu.executeCommand();
 	}
 
 }

@@ -1,3 +1,16 @@
+/**
+ * Lead: it is an entity (human, most of the times)
+ * that showed some interest in our product, from
+ * that moment it is tracked by a Sales Representative
+ * who will try to convert this lead into a win
+ * opportunity (an opportunity that succesfully ended
+ * in a sale).
+ *
+ * A lead is tracked by a sales representative, someone
+ * who can track many leads, making this a 1 to many
+ * relationship.
+ */
+
 package CRMDataLayer.model;
 
 import com.google.gson.Gson;
@@ -12,9 +25,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 
-/**
- * Definition of a Lead
- */
 @Entity
 @Table(name="_lead")
 public class Lead {

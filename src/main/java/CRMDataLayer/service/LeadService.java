@@ -13,6 +13,11 @@ public class LeadService {
     @Autowired
     LeadRepository leadRepository;
     public List<Lead> findAll() {
-        return leadRepository.findAll();
+        if (leadRepository.findAll().isEmpty()) {
+            System.out.println("no results found");
+        } else {
+            return leadRepository.findAll();
+        }
+        return null;
     }
 }

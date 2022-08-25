@@ -10,5 +10,4 @@ import java.util.UUID;
 @Repository
 public interface LeadRepository extends JpaRepository<Lead, Long> {
 
-    List<Lead> findAll();
 }
