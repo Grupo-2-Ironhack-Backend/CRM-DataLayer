@@ -14,9 +14,11 @@ public class CrmDataLayerApplication {
 	LeadRepository leadRepository;
 	public static void main(String[] args) {
 		SpringApplication.run(CrmDataLayerApplication.class, args);
+		MainMenu menu = new MainMenu();
+		menu.executeCommand();
 	}
 
-	@Bean
+	/*@Bean
 	public void run() {
 		Lead lead1 = leadRepository.save(new Lead("Rogers", "5555555555", "cap@ojsedn.com", "USA Inc."));
 		Lead lead2 = leadRepository.save(new Lead("Stark", "5555555555", "cubatas@ojsedn.com", "Extremis Foods"));
@@ -32,6 +34,6 @@ public class CrmDataLayerApplication {
 		System.out.println(lead6);
 
 
-	}
+	}*/
 
 }
