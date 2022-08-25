@@ -1,15 +1,19 @@
 package CRMDataLayer.ui;
 
+import java.util.List;
 import java.util.Scanner;
 
+import CRMDataLayer.model.Lead;
 import CRMDataLayer.repository.LeadRepository;
 import CRMDataLayer.service.LeadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * Management of the main menu and user input commands.
  */
 
+@Service
 public class MainMenu {
     @Autowired
     LeadService leadService;
@@ -79,7 +83,8 @@ public class MainMenu {
                     break;
 
                 case "showleads":
-                    this.leadService.findAll();
+                    List<Lead> leads = this.leadService.findAll();
+                    System.out.println(leads);
                     break;
 
                 case "showopportunities":

@@ -12,14 +12,17 @@ import org.springframework.context.annotation.Bean;
 public class CrmDataLayerApplication {
 	@Autowired
 	LeadRepository leadRepository;
+
+	@Autowired
+	MainMenu menu;
+
 	public static void main(String[] args) {
 		SpringApplication.run(CrmDataLayerApplication.class, args);
-		MainMenu menu = new MainMenu();
-		menu.executeCommand();
 	}
 
-	/*@Bean
+	@Bean
 	public void run() {
+		/*
 		Lead lead1 = leadRepository.save(new Lead("Rogers", "5555555555", "cap@ojsedn.com", "USA Inc."));
 		Lead lead2 = leadRepository.save(new Lead("Stark", "5555555555", "cubatas@ojsedn.com", "Extremis Foods"));
 		Lead lead3 = leadRepository.save(new Lead("Banner", "5555555555", "rads@ojsedn.com", "Gamma Ray"));
@@ -32,8 +35,9 @@ public class CrmDataLayerApplication {
 		System.out.println(lead4);
 		System.out.println(lead5);
 		System.out.println(lead6);
+		*/
 
-
-	}*/
+		menu.executeCommand();
+	}
 
 }
