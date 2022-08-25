@@ -7,9 +7,11 @@ import javax.persistence.*;
 
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 
 @Entity
@@ -21,12 +23,15 @@ public class SalesRep {
     @NonNull
     private String name;
 
-    @OneToOne
-    @JoinColumn(name="salesRep")
-    @JsonIgnore
-    private Lead _lead;
+    @OneToMany(mappedBy="salesRep")
+    private List<Lead> leads;
 
     public SalesRep(String name) {
         this.name = name;
+    }
+
+    public SalesRep() {
+        super();
+        leads = new ArrayList<Lead>();
     }
 }

@@ -13,7 +13,6 @@ import lombok.*;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 
 /**
@@ -36,12 +35,10 @@ public class Account {
     // 1 account holds n opportunities -->
     // 1 opportunity holds 1 decisionMaker -->
     // 1 account holds n decisionMaker (contact)
-    @OneToMany(mappedBy="account")
-    @JsonIgnore
+    @OneToMany(mappedBy="account", fetch = FetchType.LAZY)
     private List<Opportunity> opportunities;
 
-    @OneToMany(mappedBy="account")
-    @JsonIgnore
+    @OneToMany(mappedBy="account", fetch = FetchType.LAZY)
     private List<Contact> contacts;
 
     public Account(Activity industry, String city, String country) {
@@ -50,6 +47,12 @@ public class Account {
         this.country = country;
         this.opportunities = new ArrayList<>();
         this.contacts = new ArrayList<>();
+    }
+
+    public Account() {
+        super();
+        opportunities = new ArrayList<Opportunity>();
+        contacts = new ArrayList<Contact>();
     }
 
     @Override

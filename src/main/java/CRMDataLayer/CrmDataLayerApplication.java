@@ -25,6 +25,13 @@ public class CrmDataLayerApplication {
 		Lead lead5 = leadRepository.save(new Lead("Barton", "5555555555", "arrows@ojsedn.com", "Pizza Dog"));
 		Lead lead6 = leadRepository.save(new Lead("Odinson", "5555555555", "strongest_avenger@ojsedn.com", "Asgard Tours"));
 		System.out.println(lead1.toString());
+		System.out.println(lead2.toString());
+		System.out.println(lead3.toString());
+		System.out.println(lead4.toString());
+		System.out.println(lead5.toString());
+		System.out.println(lead6.toString());
+
+
 	}
 
 }

@@ -1,6 +1,5 @@
 package CRMDataLayer.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -31,8 +30,8 @@ public class Lead {
     @Column(name="company_name")
     private String companyName;
 
-    @OneToOne(mappedBy="_lead")
-    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name="sales_rep")
     private SalesRep salesRep;
 
     public Lead(String name, String phoneNumber, String email, String companyName) {

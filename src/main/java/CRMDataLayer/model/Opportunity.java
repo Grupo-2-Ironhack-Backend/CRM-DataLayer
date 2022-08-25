@@ -22,9 +22,6 @@ import javax.persistence.*;
 public class Opportunity {
     @Id
     private Long id;
-    /*@Column(name="decision_maker")
-    @NonNull
-    private Contact decisionMaker;*/
     @Column(name="product_type")
     @NonNull
     private ProductType productType;
@@ -33,7 +30,7 @@ public class Opportunity {
     @Column(name="status")
     private Status status;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="opportunity")
     private Contact decisionMaker;
 
