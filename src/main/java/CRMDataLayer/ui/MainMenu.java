@@ -2,6 +2,7 @@ package CRMDataLayer.ui;
 
 import java.util.Scanner;
 
+import CRMDataLayer.repository.LeadRepository;
 import CRMDataLayer.service.LeadService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -78,7 +79,7 @@ public class MainMenu {
                     break;
 
                 case "showleads":
-                    leadService.findAll();
+                    this.leadService.findAll();
                     break;
 
                 case "showopportunities":
