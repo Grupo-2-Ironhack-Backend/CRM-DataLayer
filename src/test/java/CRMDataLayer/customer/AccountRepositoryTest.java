@@ -16,7 +16,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-public class AccountTest {
+public class AccountRepositoryTest {
     Contact contact;
     Opportunity opportunity;
     List<Opportunity> opportunityList;

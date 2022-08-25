@@ -1,7 +1,6 @@
 package CRMDataLayer.customer;
 
 import CRMDataLayer.model.Contact;
-import CRMDataLayer.model.SalesRep;
 import CRMDataLayer.repository.ContactRepository;
 import CRMDataLayer.service.ContactService;
 import org.junit.jupiter.api.AfterEach;
@@ -10,12 +9,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.UUID;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-public class ContactTest {
+public class ContactRepositoryTest {
 
     @Autowired
     ContactRepository contactRepository;
