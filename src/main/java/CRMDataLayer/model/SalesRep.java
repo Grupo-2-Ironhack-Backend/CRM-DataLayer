@@ -7,6 +7,8 @@ import javax.persistence.*;
 
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,10 +23,8 @@ public class SalesRep {
     @NonNull
     private String name;
 
-    @OneToOne
-    @JoinColumn(name="salesRep")
-    @JsonIgnore
-    private Lead _lead;
+    @OneToMany(mappedBy = "salesRep")
+    private List<Lead> _lead;
 
     public SalesRep(String name) {
         this.name = name;

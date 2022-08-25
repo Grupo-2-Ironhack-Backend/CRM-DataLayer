@@ -31,7 +31,7 @@ public class Lead {
     @Column(name="company_name")
     private String companyName;
 
-    @OneToOne(mappedBy="_lead")
+    @ManyToOne
     @JsonIgnore
     private SalesRep salesRep;
 
@@ -42,9 +42,4 @@ public class Lead {
         this.companyName = companyName;
     }
 
-    @Override
-    public String toString() {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        return gson.toJson(this) + "\n" + "  ────────────────────────────";
-    }
 }

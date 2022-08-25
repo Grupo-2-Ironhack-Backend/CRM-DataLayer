@@ -1,7 +1,9 @@
 package CRMDataLayer.ui;
 
+import java.util.List;
 import java.util.Scanner;
 
+import CRMDataLayer.model.Lead;
 import CRMDataLayer.service.LeadService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 
 public class MainMenu {
-    @Autowired
+
     LeadService leadService;
 
     Scanner userInput;
@@ -48,6 +50,7 @@ public class MainMenu {
             "exit: exits the program\n";
 
     public MainMenu() {
+        leadService = new LeadService();
         userInput = new Scanner(System.in);
     }
 
@@ -78,7 +81,7 @@ public class MainMenu {
                     break;
 
                 case "showleads":
-                    leadService.findAll();
+                    showLeads(leadService.findAll());
                     break;
 
                 case "showopportunities":
@@ -148,7 +151,17 @@ public class MainMenu {
     public void removeLead(){
     }
 
-    public void showLeads(){
+    public void showLeads(List<Lead> leadList){
+        for (Lead lead:leadList) {
+            System.out.println("\n\n Id: " + lead.getId() +
+                                 "\n Name: " + lead.getName() +
+                                 "\n Phone: " + lead.getPhoneNumber() +
+                                 "\n Email: " + lead.getEmail() +
+                                 "\n Company name: " + lead.getCompanyName() +
+                                 "\n Id Sales Rep: " + lead.getSalesRep().getId() +
+                                 "\n Name Sales Rep: " + lead.getSalesRep().getName());
+        }
+
     }
 
     public void showopportunities(){
