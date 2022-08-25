@@ -4,16 +4,18 @@ import java.util.List;
 import java.util.Scanner;
 
 import CRMDataLayer.model.Lead;
+import CRMDataLayer.repository.LeadRepository;
 import CRMDataLayer.service.LeadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * Management of the main menu and user input commands.
  */
-
+@Service
 public class MainMenu {
-
-    LeadService leadService;
+    @Autowired
+    LeadRepository leadRepository;
 
     Scanner userInput;
     private final String mainMenu = "\n\n================= Welcome to IronCRM =================\n" +
@@ -50,7 +52,6 @@ public class MainMenu {
             "exit: exits the program\n";
 
     public MainMenu() {
-        leadService = new LeadService();
         userInput = new Scanner(System.in);
     }
 
@@ -81,7 +82,7 @@ public class MainMenu {
                     break;
 
                 case "showleads":
-                    showLeads(leadService.findAll());
+                    showLeads(leadRepository.findAll());
                     break;
 
                 case "showopportunities":
