@@ -27,7 +27,7 @@ public class SalesRep {
     @OneToMany(mappedBy="salesRep", cascade = CascadeType.ALL)
     private List<Lead> leads;
 
-    @OneToMany(mappedBy="salesRep")
+    @OneToMany(mappedBy="salesRep", cascade = CascadeType.ALL)
     private List<Opportunity> opportunities;
 
     public SalesRep(String name) {

@@ -27,6 +27,7 @@ import javax.persistence.*;
 @Table(name="opportunity")
 public class Opportunity {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name="product_type")
     @NonNull
@@ -36,15 +37,15 @@ public class Opportunity {
     @Column(name="status")
     private Status status;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="opportunity")
     private Contact decisionMaker;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="sales_representative")
     private SalesRep salesRep;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="opportunities")
     private Account account;
 
