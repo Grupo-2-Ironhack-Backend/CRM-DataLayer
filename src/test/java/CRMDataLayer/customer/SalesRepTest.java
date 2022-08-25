@@ -34,7 +34,8 @@ public class SalesRepTest {
     void init() { salesRepRepository.deleteAll(); }
 
     @AfterEach
-    void tearDown() { salesRepRepository.deleteAll(); }
+    void tearDown() { salesRepRepository.deleteAll();
+         }
 
     @Test
     void addNewSalesRep() {
