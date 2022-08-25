@@ -37,7 +37,7 @@ public class Contact {
 
     @OneToOne(mappedBy="decisionMaker", fetch = FetchType.LAZY)
     private Opportunity opportunity;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="account_id")
     private Account account;
 

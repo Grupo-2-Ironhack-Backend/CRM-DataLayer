@@ -21,7 +21,7 @@ public class ContactRepositoryTest {
     ContactService contactService;
 
     @BeforeEach
-    void setUp() {  }
+    void setUp() { contactRepository.deleteAll(); }
 
     @AfterEach
     void tearDown() { contactRepository.deleteAll(); }

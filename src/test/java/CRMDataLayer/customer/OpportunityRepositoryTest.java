@@ -28,6 +28,12 @@ public class OpportunityRepositoryTest {
     OpportunityRepository opportunityRepository;
     @Autowired
     OpportunityService opportunityService;
+    @Autowired
+    AccountRepository accountRepository;
+    @Autowired
+    ContactRepository contactRepository;
+    @Autowired
+    SalesRepRepository salesRepRepository;
 
     @BeforeEach
     void setUp() {
@@ -54,9 +60,10 @@ public class OpportunityRepositoryTest {
     @Test
     void checkRelationshipWorks() {
         Opportunity tester = new Opportunity(HYBRID, 2, OPEN);
-        Contact decisionMaker = new Contact("Rogers", "5555555555", "cap@ojsedn.com", "USA Inc.");
-        SalesRep salesRep = new SalesRep("Mr.Test");
-        Account account = new Account( MEDICAL, "Gargantilla del Lozoya y Pinilla de Buitrago", "Spain");
+        Contact decisionMaker = contactRepository.save(new Contact("Rogers", "5555555555", "cap@ojsedn.com", "USA Inc."));
+        SalesRep salesRep = salesRepRepository.save(new SalesRep("Mr.Test"));
+        Account account = accountRepository.save(new Account( MEDICAL, "Gargantilla del Lozoya y Pinilla de Buitrago", "Spain"));
+
         tester.setDecisionMaker(decisionMaker);
         tester.setSalesRep(salesRep);
         tester.setAccount(account);

@@ -59,6 +59,7 @@ public class AccountRepositoryTest {
         Opportunity opportunity1 = new Opportunity(ProductType.HYBRID, 2, Status.OPEN);
         Opportunity opportunity2 = new Opportunity(ProductType.FLATBED, 5, Status.CLOSED_LOST);
         System.out.println("FLAG 1");
+        accountRepository.save(tester);
         contact1.setAccount(tester);
         contact2.setAccount(tester);
         System.out.println("FLAG 2");
