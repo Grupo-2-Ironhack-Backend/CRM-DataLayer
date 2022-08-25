@@ -206,135 +206,135 @@ public class MainMenu {
                     break;
 
                 case ("reportleadbysalesrep"):
-                    reportleadbysalesrep();
+                    reportLeadBySalesRep();
                     break;
                     
                 case ("reportopportunitybysalesrep"):
-                    reportopportunitybysalesrep();
+                    reportOpportunityBySalesRep();
                     break;
                     
                 case ("reportclosed-wonbysalesrep"):
-                    reportclosedWonbysalesrep();
+                    reportClosedWonBySalesRep();
                     break;
                     
                 case ("reportclosed-lostbysalesrep"):
-                    reportclosedLostbysalesrep();
+                    reportClosedLostBySalesRep();
                     break;
                     
                 case ("reportopenbysalesrep"):
-                    reportopenbysalesrep();
+                    reportopenBySalesRep();
                     break;
                     
                 case ("reportopportunitybytheproduct"):
-                    reportopportunitybytheproduct();
+                    reportOpportunityByProduct();
                     break;
                     
                 case ("reportclosed-wonbytheproduct"):
-                    reportclosedWonbytheproduct();
+                    reportClosedWonByProduct();
                     break;
                     
                 case ("reportclosed-lostbytheproduct"):
-                    reportclosedLostbytheproduct();
+                    reportClosedLostByProduct();
                     break;
                     
                 case ("reportopenbytheproduct"):
-                    reportopenbytheproduct();
+                    reportOpenByProduct();
                     break;
                     
                 case ("reportopportunitybycountry"):
-                    reportopportunitybycountry();
+                    reportOpportunityByCountry();
                     break;
                     
                 case ("reportclosed-wonbycountry"):
-                    reportclosedWonbycountry();
+                    reportClosedWonByCountry();
                     break;
                     
                 case ("reportclosed-lostbycountry"):
-                    reportclosedLostbycountry();
+                    reportClosedLostByCountry();
                     break;
                     
                 case ("reportopenbycountry"):
-                    reportopenbycountry();
+                    reportopenByCountry();
                     break;
                     
                 case ("reportopportunitybycity"):
-                    reportopportunitybycity();
+                    reportOpportunityByCity();
                     break;
                     
                 case ("reportclosed-wonbycity"):
-                    reportclosedWonbycity();
+                    reportClosedWonByCity();
                     break;
                     
                 case ("reportclosed-lostbycity"):
-                    reportclosedLostbycity();
+                    reportClosedLostByCity();
                     break;
                     
                 case ("reportopenbycity"):
-                    reportopenbycity();
+                    reportOpenByCity();
                     break;
                     
                 case ("reportopportunitybyindustry"):
-                    reportopportunitybyindustry();
+                    reportOpportunityByIndustry();
                     break;
                     
                 case ("reportclosed-wonbyindustry"):
-                    reportclosedWonbyindustry();
+                    reportClosedWonByIndustry();
                     break;
                     
                 case ("reportclosed-lostbyindustry"):
-                    reportclosedLostbyindustry();
+                    reportClosedLostByIndustry();
                     break;
                     
                 case ("reportopenbyindustry"):
-                    reportopenbyindustry();
+                    reportOpenByIndustry();
                     break;
                     
                 case ("meanemployeecount"):
-                    meanemployeecount();
+                    meanEmployeeCount();
                     break;
                     
                 case ("medianemployeecount"):
-                    medianemployeecount();
+                    medianEmployeeCount();
                     break;
                     
                 case ("maxemployeecount"):
-                    maxemployeecount();
+                    maxEmployeeCount();
                     break;
                     
                 case ("minemployeecount"):
-                    minemployeecount();
+                    minEmployeeCount();
                     break;
                     
                 case ("meanquantity"):
-                    meanquantity();
+                    meanQuantity();
                     break;
                     
                 case ("medianquantity"):
-                    medianquantity();
+                    medianQuantity();
                     break;
                     
                 case ("maxquantity"):
-                    maxquantity();
+                    maxQuantity();
                     break;
                     
                 case ("minquantity"):
-                    minquantity();
+                    minQuantity();
                     break;
                     
                 case ("meanoppsperaccount"):
-                    meanoppsperaccount();
+                    meanOppsPerAccount();
                     break;
                     
                 case ("medianoppsperaccount"):
-                    medianoppsperaccount();
+                    medianOppsPerAccount();
                     break;
                     
                 case ("maxoppsperaccount"):
-                    maxoppsperaccount();
+                    maxOppsPerAccount();
                     break;
                     
                 case ("minoppsperaccount"):
-                    minoppsperaccount();
+                    minOppsPerAccount();
                     break;                
                 
                 case "exit":
@@ -397,135 +397,135 @@ public class MainMenu {
     public void newSalesRep(){
     }
 
-    public void reportleadbysalesrep(){
+    public void reportLeadBySalesRep(){
 
     }
     
-    public void reportopportunitybysalesrep(){
+    public void reportOpportunityBySalesRep(){
     
     }
     
-    public void reportclosedWonbysalesrep(){
+    public void reportClosedWonBySalesRep(){
     
     }
     
-    public void reportclosedLostbysalesrep(){
+    public void reportClosedLostBySalesRep(){
     
     }
     
-    public void reportopenbysalesrep(){
+    public void reportopenBySalesRep(){
     
     }
     
-    public void reportopportunitybytheproduct(){
+    public void reportOpportunityByProduct(){
     
     }
     
-    public void reportclosedWonbytheproduct(){
+    public void reportClosedWonByProduct(){
     
     }
     
-    public void reportclosedLostbytheproduct(){
+    public void reportClosedLostByProduct(){
     
     }
     
-    public void reportopenbytheproduct(){
+    public void reportOpenByProduct(){
     
     }
     
-    public void reportopportunitybycountry(){
+    public void reportOpportunityByCountry(){
     
     }
     
-    public void reportclosedWonbycountry(){
+    public void reportClosedWonByCountry(){
     
     }
     
-    public void reportclosedLostbycountry(){
+    public void reportClosedLostByCountry(){
     
     }
     
-    public void reportopenbycountry(){
+    public void reportopenByCountry(){
     
     }
     
-    public void reportopportunitybycity(){
+    public void reportOpportunityByCity(){
     
     }
     
-    public void reportclosedWonbycity(){
+    public void reportClosedWonByCity(){
     
     }
     
-    public void reportclosedLostbycity(){
+    public void reportClosedLostByCity(){
     
     }
     
-    public void reportopenbycity(){
+    public void reportOpenByCity(){
     
     }
     
-    public void reportopportunitybyindustry(){
+    public void reportOpportunityByIndustry(){
     
     }
     
-    public void reportclosedWonbyindustry(){
+    public void reportClosedWonByIndustry(){
     
     }
     
-    public void reportclosedLostbyindustry(){
+    public void reportClosedLostByIndustry(){
     
     }
     
-    public void reportopenbyindustry(){
+    public void reportOpenByIndustry(){
     
     }
     
-    public void meanemployeecount(){
+    public void meanEmployeeCount(){
     
     }
     
-    public void medianemployeecount(){
+    public void medianEmployeeCount(){
     
     }
     
-    public void maxemployeecount(){
+    public void maxEmployeeCount(){
     
     }
     
-    public void minemployeecount(){
+    public void minEmployeeCount(){
     
     }
     
-    public void meanquantity(){
+    public void meanQuantity(){
     
     }
     
-    public void medianquantity(){
+    public void medianQuantity(){
     
     }
     
-    public void maxquantity(){
+    public void maxQuantity(){
     
     }
     
-    public void minquantity(){
+    public void minQuantity(){
     
     }
     
-    public void meanoppsperaccount(){
+    public void meanOppsPerAccount(){
     
     }
     
-    public void medianoppsperaccount(){
+    public void medianOppsPerAccount(){
     
     }
     
-    public void maxoppsperaccount(){
+    public void maxOppsPerAccount(){
     
     }
     
-    public void minoppsperaccount(){
+    public void minOppsPerAccount(){
     
     }
     
