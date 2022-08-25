@@ -40,9 +40,5 @@ public class LeadTest {
         assertEquals("name", res);
     }
 
-    @Test
-    void getId_Test() {
-        UUID res = lead.getId();
-        assertEquals(UUID.class, res.getClass());
-    }
+
 }

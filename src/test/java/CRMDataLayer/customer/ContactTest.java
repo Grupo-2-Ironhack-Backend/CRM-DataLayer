@@ -40,9 +40,5 @@ public class ContactTest {
         assertEquals("name", res);
     }
 
-    @Test
-    void getId_Test() {
-        UUID res = contact.getId();
-        assertEquals(UUID.class, res.getClass());
-    }
+
 }
