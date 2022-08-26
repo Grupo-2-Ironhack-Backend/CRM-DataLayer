@@ -80,26 +80,4 @@ public class TextMenus {
             "\t\"crm quantityrep\": show options for Quantity reporting\n" +
             "\t\"crm opportunityrep\": show options for Opportunity reporting\n" +
             "\t\"crm exit\": exits the program.\n";
-
-    public static String commandResume = "\n\n================= Cheatsheet: =================\n\n" +
-            "\t\"crm showleads\": list of leads\n" +
-            "\t\"crm showopportunities\": list of Opportunities\n" +
-            "\t\"crm showcontacts\": list of contacts\n" +
-            "\t\"crm showaccounts\": list of accounts\n" +
-            "\t\"crm lookuplead\": specific lead by id\n" +
-            "\t\"crm newlead\": create a new lead\n" +
-            "\t\"crm removelead\": removes a lead\n" +
-            "\t\"crm convert\": converts a lead to an opportunity\n" +
-            "\t\"crm close-lost\": opportunity status changed to lost sale\n" +
-            "\t\"crm close-won\": opportunity status changed to won sale\n" +
-            "\t\"crm newsalesrep\": create a new salesrep\n" +
-            "\t\"crm salesreprep\": show options for SalesRep reporting\n" +
-            "\t\"crm productrep\": show options for Product reporting\n" +
-            "\t\"crm countryrep\": show options for Country reporting\n" +
-            "\t\"crm cityrep\": show options for City reporting\n" +
-            "\t\"crm industryrep\": show options for Industry reporting\n" +
-            "\t\"crm employeerep\": show options for employeeCount reporting\n" +
-            "\t\"crm quantityrep\": show options for Quantity reporting\n" +
-            "\t\"crm opportunityrep\": show options for Opportunity reporting\n" +
-            "\t\"exit\": exits the program\n";
 }
