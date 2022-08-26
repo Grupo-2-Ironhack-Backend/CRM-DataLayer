@@ -26,16 +26,14 @@ public class MainMenu {
 
     Scanner userInput;
 
-    public MainMenu() {
+    public MainMenu(ApplicationContext context) {
+        this.context = context;
         userInput = new Scanner(System.in);
     }
 
-    public void initiateAppShutdown (int returnCode) {
-        SpringApplication.exit(context, () -> returnCode);
-    }
-
     public void shutdown() {
-        initiateAppShutdown(0);
+        SpringApplication.exit(context);
+        System.exit(0);
     }
 
     public void executeCommand() {
@@ -268,7 +266,7 @@ public class MainMenu {
                     break;
 
                 case "exit":
-                    System.out.println("CRM shut down, please reset your device to restart");
+                    System.out.println("See you in future sessions...");
                     shutdown();
 
                 default:
