@@ -1,12 +1,8 @@
 package CRMDataLayer.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.lang.NonNull;
-
 import javax.persistence.*;
-
 import lombok.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +14,7 @@ import java.util.List;
 @Table(name="sales_rep")
 public class SalesRep {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name="name", length = 50)
     @NonNull

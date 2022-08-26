@@ -17,7 +17,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import javax.persistence.*;
-import javax.persistence.criteria.Fetch;
 
 import lombok.*;
 
