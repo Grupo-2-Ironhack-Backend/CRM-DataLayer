@@ -135,7 +135,7 @@ public class MainMenu {
                     showLeads();
                     break;
 
-                case "showsalesreps":
+                case "crmshowsalesreps":
                     showSalesReps();
                     break;
 
