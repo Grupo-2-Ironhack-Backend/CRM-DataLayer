@@ -30,6 +30,7 @@ import lombok.*;
 public class Account {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Enumerated(EnumType.STRING)
     @Column(name="industry")
@@ -42,10 +43,10 @@ public class Account {
     // 1 account holds n opportunities -->
     // 1 opportunity holds 1 decisionMaker -->
     // 1 account holds n decisionMaker (contact)
-    @OneToMany(mappedBy="account", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="account", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Opportunity> opportunities;
 
-    @OneToMany(mappedBy="account", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="account", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Contact> contacts;
 
     public Account(Activity industry, String city, String country) {
