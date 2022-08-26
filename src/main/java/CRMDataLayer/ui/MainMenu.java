@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Scanner;
 
 import CRMDataLayer.enums.ProductType;
-import CRMDataLayer.enums.Status;
-import CRMDataLayer.model.Lead;
+import CRMDataLayer.model.*;
 
-import CRMDataLayer.model.SalesRep;
+import CRMDataLayer.repository.AccountRepository;
+import CRMDataLayer.repository.ContactRepository;
+import CRMDataLayer.repository.OpportunityRepository;
+import CRMDataLayer.repository.SalesRepRepository;
 import CRMDataLayer.service.LeadService;
 import CRMDataLayer.service.OpportunityService;
 import CRMDataLayer.service.SalesRepService;
@@ -49,14 +51,21 @@ import static java.lang.Long.parseLong;
 public class MainMenu {
     @Autowired
     LeadService leadService;
-
+    @Autowired
+    SalesRepRepository salesRepRepository;
     @Autowired
     SalesRepService salesRepService;
     @Autowired
     OpportunityService opportunityService;
-
+    @Autowired
+    OpportunityRepository opportunityRepository;
+    @Autowired
+    AccountRepository accountRepository;
+    @Autowired
+    ContactRepository contactRepository;
     @Autowired
      private ApplicationContext context;
+
 
     Scanner userInput;
 
@@ -329,7 +338,22 @@ public class MainMenu {
         System.out.println("\nCompany name: ");
         String companyLead = userInput.nextLine();
 
-        this.leadService.addNew(new Lead(leadName, leadPhone, leadMail, companyLead));
+        // Adding the Sales Rep from the ones available in the database
+        SalesRep salesRep;
+        while (true) {
+            System.out.println("\nAssign a Sales Representative to this lead (Type the ID): ");
+            showSalesReps();
+            try {
+                salesRep = salesRepRepository.findById(userInput.nextLong()).get();
+                break;
+            } catch (Exception e) {
+                System.err.println("Not a valid ID");
+            }
+        }
+        Lead newLead = new Lead(leadName, leadPhone, leadMail, companyLead);
+        newLead.setSalesRep(salesRep);
+        leadService.addNew(newLead);
+        System.out.println("SAVED!");
     }
 
     public void removeLead() {
@@ -337,20 +361,40 @@ public class MainMenu {
 
     public void showLeads() {
         List<Lead> leads = this.leadService.findAll();
-        System.out.println(leads);
+        for (Lead lead : leads) {
+            System.out.println("Id: " + lead.getId() + " | Name: " + lead.getName() + " | Company: " + lead.getCompanyName());
+        }
     }
 
     public void showopportunities() {
+        List<Opportunity> opportunities = opportunityRepository.findAll();
+        for (Opportunity opportunity : opportunities) {
+            System.out.println("Id: " + opportunity.getId() +
+                       " | Product: " + opportunity.getProductType() +
+                        " | Trucks: " + opportunity.getNumberOfTrucks() +
+                        " | Status: " + opportunity.getStatus());
+        }
     }
-    public void  showSalesReps() {
+    public void showSalesReps() {
         List<SalesRep> salesRep = salesRepService.findAll();
-        System.out.println(salesRep);
+        for (SalesRep salesRep_i : salesRep) {
+            System.out.println("Id: " + salesRep_i.getId() + " | Name: " + salesRep_i.getName());
+        }
     }
 
     public void showcontacts() {
+        List<Contact> contacts = contactRepository.findAll();
+        for (Contact contact : contacts) {
+            System.out.println("Id: " + contact.getId() + " | Name: " + contact.getName());
+        }
     }
 
     public void showaccounts() {
+        List<Account> accounts = accountRepository.findAll();
+for (Account account : accounts) {
+            System.out.println("Id: " + account.getId() + " | Industry: " + account.getIndustry() + " | City: " + account.getCity());
+        }
+
     }
 
     public void lookuplead() {
@@ -358,6 +402,7 @@ public class MainMenu {
 
     public void convert() {
         System.out.println("\nEnter the lead id: ");
+        showLeads();
         String leadId = userInput.nextLine();
         System.out.println("\nEnter the type of truck: \n1: HYBRID\n2: FLATBED\n3: BOX\n");
         String productType = userInput.nextLine();
@@ -394,6 +439,10 @@ public class MainMenu {
     }
 
     public void newSalesRep() {
+        System.out.println("\nEnter name for the new Sales Representative: ");
+        SalesRep salesRep = new SalesRep(userInput.nextLine());
+        salesRepRepository.save(salesRep);
+        System.out.println("Saved in DB!: " + salesRep.getName() + " " + salesRep.getId());
     }
 
     public void reportLeadBySalesRep() {

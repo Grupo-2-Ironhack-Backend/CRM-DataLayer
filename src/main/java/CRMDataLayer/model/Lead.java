@@ -48,10 +48,4 @@ public class Lead {
         this.email = email;
         this.companyName = companyName;
     }
-
-    @Override
-    public String toString() {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        return gson.toJson(this) + "\n" + "  ────────────────────────────";
-    }
 }

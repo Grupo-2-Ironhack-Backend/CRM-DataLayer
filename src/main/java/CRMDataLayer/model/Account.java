@@ -62,10 +62,4 @@ public class Account {
         opportunities = new ArrayList<>();
         contacts = new ArrayList<>();
     }
-
-    @Override
-    public String toString() {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        return gson.toJson(this) + "\n" + "    ────────────────────────────";
-    }
 }

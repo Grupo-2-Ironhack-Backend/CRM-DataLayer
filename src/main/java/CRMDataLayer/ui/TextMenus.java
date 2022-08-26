@@ -63,6 +63,7 @@ public class TextMenus {
             "\t\"crm showaccounts\": shows a list of all accounts presents in database.\n" +
             "\t\"crm lookuplead\": returns an specific lead, searched by id.\n" +
             "\t\"crm newlead\": creates a new lead by asking for the new info.\n" +
+            "\t\"crm newsalesrep\": creates a new lead by asking for the new info.\n" +
             "\t\"crm removelead\": removes the lead associated with specified id.\n" +
             "\t\"crm convert\": converts a lead into an opportunity and creates \n" +
             "\t\t\tits associated contact and account.\n" +

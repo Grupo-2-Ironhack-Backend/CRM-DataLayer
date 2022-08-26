@@ -54,10 +54,4 @@ public class Opportunity {
         this.numberOfTrucks = numberOfTrucks;
         this.status = status;
     }
-
-    @Override
-    public String toString() {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        return gson.toJson(this) + "\n" + "   ────────────────────────────";
-    }
 }
