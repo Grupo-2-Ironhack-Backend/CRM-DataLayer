@@ -56,7 +56,7 @@ public class TextMenus {
     public static String mainMenu = "\n\n================= Welcome to IronCRM =================\n" +
             "\nUse this tool to interact with your Lead database\n" +
             "and perform operations from them:\n\n" +
-            "\t\"crm showleads\": shows a list of all leads presents in database.\n" +
+            "\t\"crm show leads\": shows a list of all leads presents in database.\n" +
             "\t\"crm showsalesreps\": shows a list of all SalesReps presents in database.\n" +
             "\t\"crm showopportunities\": shows a list of all Opportunities presents in database.\n" +
             "\t\"crm showcontacts\": shows a list of all contacts presents in database.\n" +
@@ -69,8 +69,8 @@ public class TextMenus {
             "\t\"crm close-lost\": changes opportunity status to \"CLOSED-LOST\" to\n" +
             "\t\t\treflect that this opportunity will not become a sale.\n" +
             "\t\"crm close-won\": changes opportunity status to \"CLOSED-WON\" to\n" +
-            "\t\t\treflect that this opportunity will become a sale." +
-            "\t\"crm New SalesRep\": \n" +
+            "\t\t\treflect that this opportunity will become a sale.\n" +
+            "\t\"crm New SalesRep\": create a new SalesRep\n" +
             "\t\"crm salesreprep\": show options for SalesRep reporting\n" +
             "\t\"crm productrep\": show options for Product reporting\n" +
             "\t\"crm countryrep\": show options for Country reporting\n" +
