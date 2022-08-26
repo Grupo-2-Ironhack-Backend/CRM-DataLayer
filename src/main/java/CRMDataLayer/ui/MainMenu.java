@@ -4,7 +4,11 @@ import java.util.List;
 import java.util.Scanner;
 
 import CRMDataLayer.model.Lead;
+import CRMDataLayer.model.SalesRep;
+import CRMDataLayer.repository.LeadRepository;
+import CRMDataLayer.repository.SalesRepRepository;
 import CRMDataLayer.service.LeadService;
+import CRMDataLayer.service.SalesRepService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +20,15 @@ import org.springframework.stereotype.Service;
 public class MainMenu {
     @Autowired
     LeadService leadService;
+
+    @Autowired
+    LeadRepository leadRepository;
+
+    @Autowired
+    SalesRepRepository salesRepRepository;
+
+    @Autowired
+    SalesRepService salesRepService;
 
     Scanner userInput;
     private final String reportingMenuResume = "\n\n\tReporting By SalesRep\n\n" +
@@ -325,6 +338,15 @@ public class MainMenu {
 
         System.out.println("\nCompany name: ");
         String companyLead = userInput.nextLine();
+
+        System.out.println("\nSalesRep Id");
+        Long salesRepId = userInput.nextLong();
+
+        if (this.salesRepRepository.findById(salesRepId).isPresent()){
+            leadRepository.save(new Lead("Raul","45446556","sadasd@sdas.com","company",salesRepService.findBySalesRepId(salesRepId)));
+        } else {
+            System.out.println("No existe ese ID");
+        }
     }
 
     public void removeLead() {
@@ -357,6 +379,9 @@ public class MainMenu {
     }
 
     public void newSalesRep() {
+        System.out.println("\nEnter name for the new SalesRep: ");
+        String salesRep = userInput.nextLine();
+        salesRepRepository.save(new SalesRep(salesRep));
     }
 
     public void reportLeadBySalesRep() {
