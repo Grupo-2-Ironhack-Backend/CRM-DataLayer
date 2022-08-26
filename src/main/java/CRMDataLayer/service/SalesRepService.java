@@ -18,4 +18,9 @@ public class SalesRepService {
         return salesRepRepository.findByName(name);
     }
 
+    public List<SalesRep> findAll() {
+        return salesRepRepository.findAll();
+    }
+
+
 }
