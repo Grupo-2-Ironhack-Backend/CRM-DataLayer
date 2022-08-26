@@ -1,5 +1,3 @@
-// TODO: fix shutdown
-
 package CRMDataLayer.ui;
 
 import java.util.List;
@@ -13,7 +11,29 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Service;
 
 /**
- * Management of the main menu and user input commands.
+ * @Author: TheBigFive {Kat, Paula, Jhon, Gerard & Alex}
+ * @Since: 26/08/2022
+ * @Version: 1.2.35
+ *
+ * @Method Shutdown()
+ * @Param: ApplicationContext
+ * @Return: void
+ * Exists the application first, then the system.
+ *
+ * @Method: executeCommand()
+ * @Param: none
+ * Initiates user input flux, receives command entered
+ * via keyboard, it is formatted in
+ * @See commandInterpreter() then filtered via switch
+ * loop and executed via services
+ *
+ * @Method: newLead()
+ * @Param: none
+ * Creates a new lead through user input
+ *
+ * @Method: showLeads()
+ * @Param: none
+ * Shows a list of leads in database
  */
 
 @Service

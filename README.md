@@ -1,6 +1,6 @@
 # CRM - OOP Homework (Unit 2)
 
-Delivered exercise. CRM - OOP Homework (Unit 2) (IRONHACK)
+Delivered exercise. CRM - DataLayer Homework (Unit 3) (IRONHACK)
 
 Welcome to the ultimate CRM (Customer Relationship Management) system. CRMs are a tool that almost every sales team uses to track prospective and existing customers through the sales process.
 
@@ -10,8 +10,9 @@ This CRM allows us to:
 - Convert Leads into Opportunities
 - Associate an Opportunity with an Account.
 - Associate Contacts with an Opportunity.
+- Generate a wide variety of reports.
 
-Leads, Contacts, Opportunities and Accounts are stored in a GitHub repository so you never loose information from your beloved customers. You also get your local copy of your updates.
+Leads, Contacts, Opportunities and Accounts are stored in a MySQLremote database so you never loose information from your beloved customers.
 
 ## Diagrams
 
@@ -61,7 +62,7 @@ exits the program<br>
 
 ## Requirements
 
-First of all you need to clone the code and include the Access Token that we have sent you so your updates become persistent in a remote repository. The Access Token needs to be pasted in the field 'JAVA_APP_PASSWORD' in the resources/config.properties file.
+In order to connect to the database we will provide you the credentials needed -user and password-, then just put them in the application.properties, you are ready to go.
 
 After that you have two options to run the code:
 - Option 1: You need to have IntelliJ in your local system to clone this repository and run it.
@@ -71,7 +72,7 @@ After that you have two options to run the code:
 
 You just need to type the command you need, press ENTER and follow the given instructions.
 
-Here there is an example:
+Here is an example:
 
 ![example](example.gif "Example CLI")
 

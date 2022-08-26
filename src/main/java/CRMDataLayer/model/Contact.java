@@ -1,7 +1,7 @@
 /**
  * A contact is a lead which is being tracked in
  * the crm database. At this point, the lead has
- * showed an specific interest for a product, this
+ * showed a specific interest for a product, this
  * creates a sales opportunity, taking the lead
  * info to create the contact entity. The contact
  * and its related opportunity are stored in an
