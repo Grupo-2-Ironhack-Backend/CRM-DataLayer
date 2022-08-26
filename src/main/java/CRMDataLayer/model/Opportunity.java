@@ -49,10 +49,11 @@ public class Opportunity {
     @JoinColumn(name="opportunities")
     private Account account;
 
-    public Opportunity(ProductType productType, int numberOfTrucks, Status status) {
+    public Opportunity(ProductType productType, int numberOfTrucks, Status status, SalesRep salesRep) {
         this.productType = productType;
         this.numberOfTrucks = numberOfTrucks;
         this.status = status;
+        this.salesRep = salesRep;
     }
 
     @Override

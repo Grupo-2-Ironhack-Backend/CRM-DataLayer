@@ -5,12 +5,12 @@ package CRMDataLayer.ui;
 import java.util.List;
 import java.util.Scanner;
 
+import CRMDataLayer.enums.Activity;
 import CRMDataLayer.enums.ProductType;
-import CRMDataLayer.model.Lead;
+import CRMDataLayer.enums.Status;
+import CRMDataLayer.model.*;
 
-import CRMDataLayer.model.SalesRep;
-import CRMDataLayer.repository.LeadRepository;
-import CRMDataLayer.repository.SalesRepRepository;
+import CRMDataLayer.repository.*;
 import CRMDataLayer.service.LeadService;
 import CRMDataLayer.service.SalesRepService;
 import org.springframework.context.ApplicationContext;
@@ -38,6 +38,15 @@ public class MainMenu {
 
     @Autowired
     LeadRepository leadRepository;
+
+    @Autowired
+    OpportunityRepository opportunityRepository;
+
+    @Autowired
+    AccountRepository accountRepository;
+
+    @Autowired
+    ContactRepository contactRepository;
 
     Scanner userInput;
 
@@ -321,7 +330,14 @@ public class MainMenu {
 
     public void showLeads() {
         List<Lead> leads = this.leadService.findAll();
-        System.out.println(leads);
+        for (Lead lead:leads) {
+            System.out.println("\n\nId: " + lead.getId() +
+                    "\nName: " + lead.getName() +
+                    "\nPhone: " + lead.getPhoneNumber() +
+                    "\nEmail: " + lead.getEmail() +
+                    "\nCompany_name: " + lead.getCompanyName() +
+                    "\nSalesRepName: " + lead.getSalesRep().getName());
+        }
     }
 
     public void showopportunities() {
@@ -342,29 +358,76 @@ public class MainMenu {
 
     public void convert() {
 
+        System.out.println("Enter an id to look for: ");
+        Long userLeadToConvert = userInput.nextLong();
+        Lead lead = null;
+
+        ProductType product;
+        while (true) {
+            try {
+                System.out.println("\nChoose between: HYBRID, FLATBED or BOX: ");
+                product = ProductType.valueOf(userInput.nextLine().toUpperCase());
+                break;
+            } catch (Exception e) {
+                System.out.println("Not a valid option");
+            }
+        }
+
+        System.out.println("\nHow many trucks?");
+        int stringTrucks = userInput.nextInt();
+
         System.out.println("Would you like to create a new Account? (Y/N)");
         String s = userInput.nextLine();
 
-        if (s.equals("Y")){
-            System.out.println("Enter an id to look for: ");
-            String userLeadToConvert = userInput.nextLine();
 
-            System.out.println("\nChoose between: HYBRID, FLATBED or BOX: ");
-            ProductType product = ProductType.valueOf(userInput.nextLine().toUpperCase());
+        lead = leadService.findById(userLeadToConvert);
 
-            System.out.println("\nHow many trucks?");
-            String stringTrucks = userInput.nextLine();
 
+        assert lead != null;
+        Opportunity opportunity = new Opportunity(product,stringTrucks, Status.OPEN,lead.getSalesRep());
+        //opportunityRepository.save(new Opportunity(product,stringTrucks, Status.OPEN,lead.getSalesRep()));
+
+
+
+        if (s.equals("y")){
             System.out.println("Enter industry [Produce/Ecommerce/Manufacturing/Medical]: ");
             String industryName = CommandInterpreter.InputToCommand(userInput.nextLine());
+            Activity userIndustry = null;
+
+            for (Activity industry : Activity.values()) {
+                if (industryName.equals(industry.activityLabel.toLowerCase())) {
+                    userIndustry = industry;
+                    break;
+                }
+            }
+
 
             System.out.println("\nEnter the city: ");
             String city = userInput.nextLine();
 
             System.out.println("\nEnter the country: ");
             String country = userInput.nextLine();
-        } else if(s.equals("N")){
 
+            Account account = new Account(userIndustry,city,country);
+            account.setOpportunities(List.of(opportunity));
+            Contact contact = new Contact(lead.getName(),lead.getPhoneNumber(),lead.getEmail(),lead.getCompanyName());
+            contact.setOpportunity(opportunity);
+            contact.setAccount(account);
+            account.setContacts(List.of(contact));
+            opportunity.setAccount(account);
+
+            accountRepository.save(account);
+            opportunityRepository.save(opportunity);
+            contactRepository.save(contact);
+
+        } else if(s.equals("n")){
+            System.out.println("Enter an id to look for: ");
+            Long accountId = userInput.nextLong();
+
+            if(accountRepository.findById(accountId).isPresent()){
+                Account account = accountRepository.findById(accountId).get();
+                account.setOpportunities(List.of(opportunity));
+            }
         }
 
     }
@@ -376,6 +439,9 @@ public class MainMenu {
     }
 
     public void newSalesRep() {
+        System.out.println("\nEnter name for the new SalesRep: ");
+        String salesRep = userInput.nextLine();
+        salesRepRepository.save(new SalesRep(salesRep));
     }
 
     public void reportLeadBySalesRep() {
