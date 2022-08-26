@@ -25,90 +25,6 @@ public class MainMenu {
      private ApplicationContext context;
 
     Scanner userInput;
-    private final String reportingMenuResume = "\n\n\tReporting By SalesRep\n\n" +
-            "\t\"Report Lead by SalesRep\": A count of Leads by SalesRep\n" +
-            "\t\"Report Opportunity by SalesRep\": A count of all Opportunities by SalesRep\n" +
-            "\t\"Report CLOSED-WON by SalesRep\": A count of all CLOSED_WON Opportunities\n" +
-            "\t\"Report CLOSED-LOST by SalesRep\": A count of all CLOSED_LOST Opportunities by SalesRep\n" +
-            "\t\"Report OPEN by SalesRep\": A count of all OPEN Opportunities by SalesRep\n" +
-
-            "\n\tReporting By Product\n\n" +
-            "\t\"Report Opportunity by the product\": A count of all Opportunities by the product\n" +
-            "\t\"Report CLOSED-WON by the product\": A count of all CLOSED_WON Opportunities by the product\n" +
-            "\t\"Report CLOSED-LOST by the product\": A count of all CLOSED_LOST Opportunities by the product\n" +
-            "\t\"Report OPEN by the product\": A count of all OPEN Opportunities by the product\n" +
-
-            "\n\tReporting By Country\n\n" +
-            "\t\"Report Opportunity by Country\": A count of all Opportunities by country\n" +
-            "\t\"Report CLOSED-WON by Country\": A count of all CLOSED_WON Opportunities by country\n" +
-            "\t\"Report CLOSED-LOST by Country\": A count of all CLOSED_LOST Opportunities by country\n" +
-            "\t\"Report OPEN by Country\": A count of all OPEN Opportunities by country\n" +
-
-            "\n\tReporting By City\n\n" +
-            "\t\"Report Opportunity by City\": A count of all Opportunities by City\n" +
-            "\t\"Report CLOSED-WON by City\": A count of all CLOSED_WON Opportunities by City\n" +
-            "\t\"Report CLOSED-LOST by City\": A count of all CLOSED_LOST Opportunities by City\n" +
-            "\t\"Report OPEN by City\": A count of all OPEN Opportunities by City\n" +
-
-            "\n\tReporting By Industry\n\n" +
-            "\t\"Report Opportunity by Industry\": A count of all Opportunities by Industry\n" +
-            "\t\"Report CLOSED-WON by Industry\": A count of all CLOSED_WON Opportunities by Industry\n" +
-            "\t\"Report CLOSED-LOST by Industry\": A count of all CLOSED_LOST Opportunities by Industry\n" +
-            "\t\"Report OPEN by Industry\": A count of all OPEN Opportunities by Industry\n" +
-
-            "\n\tReporting EmployeeCount States\n\n" +
-            "\t\"Mean EmployeeCount\": The mean employeeCount\n" +
-            "\t\"Median EmployeeCount\": The median employeeCount\n" +
-            "\t\"Max EmployeeCount\": The maximum employeeCount\n" +
-            "\t\"Min EmployeeCount\": The minimum employeeCount\n" +
-
-            "\n\tReporting Quantity States\n\n" +
-            "\t\"Mean Quantity\": The mean Quantity of products\n" +
-            "\t\"Median Quantity\": The median Quantity of products\n" +
-            "\t\"Max Quantity\": The maximum Quantity of products\n" +
-            "\t\"Min Quantity\": The minimum Quantity of products\n" +
-
-            "\n\tReporting EmployeeCount States\n\n" +
-            "\t\"Mean Opps per Account\": The mean number of Opportunities associated with an Account\n" +
-            "\t\"Median Opps per Account\": The median number of Opportunities associated with an Account \n" +
-            "\t\"Max Opps per Account\": The maximum number of Opportunities associated with an Account\n" +
-            "\t\"Min Opps per Account\": The minimum number of Opportunities associated with an Account\n\n";
-
-    private final String mainMenu = "\n\n================= Welcome to IronCRM =================\n" +
-            "\nUse this tool to interact with your Lead database\n" +
-            "and perform operations from them:\n\n" +
-            "\t\"showleads\": shows a list of all leads presents in database.\n" +
-            "\t\"showopportunities\": shows a list of all Opportunities presents in database.\n" +
-            "\t\"showcontacts\": shows a list of all contacts presents in database.\n" +
-            "\t\"showaccounts\": shows a list of all accounts presents in database.\n" +
-            "\t\"lookuplead\": returns an specific lead, searched by id.\n" +
-            "\t\"newlead\": creates a new lead by asking for the new info.\n" +
-            "\t\"removelead\": removes the lead associated with specified id.\n" +
-            "\t\"New SalesRep\": \n" +
-
-            "\t\"convert\": converts a lead into an opportunity and creates \n" +
-            "\t\t\tits associated contact and account.\n" +
-            "\t\"close-lost\": changes opportunity status to \"CLOSED-LOST\" to\n" +
-            "\t\t\treflect that this opportunity will not become a sale.\n" +
-            "\t\"close-won\": changes opportunity status to \"CLOSED-WON\" to\n" +
-            "\t\t\treflect that this opportunity will become a sale." +
-            reportingMenuResume +
-            "\t\"exit\": exits the program.\n";
-
-    private final String commandResume = "\n\n================= Cheatsheet: =================\n\n" +
-            "\t\"showleads\": list of leads\n" +
-            "\t\"showopportunities\": list of Opportunities\n" +
-            "\t\"showcontacts\": list of contacts\n" +
-            "\t\"showaccounts\": list of accounts\n" +
-            "\t\"lookuplead\": specific lead by id\n" +
-            "\t\"newlead\": create a new lead\n" +
-            "\t\"removelead\": removes a lead\n" +
-            "\t\"convert\": converts a lead to an opportunity\n" +
-            "\t\"close-lost\": opportunity status changed to lost sale\n" +
-            "\t\"close-won\": opportunity status changed to won sale\n" +
-            "\t\"newsalesrep\": create a new salesrep\n" +
-            reportingMenuResume +
-            "\t\"exit\": exits the program\n";
 
     public MainMenu() {
         userInput = new Scanner(System.in);
@@ -124,7 +40,7 @@ public class MainMenu {
 
     public void executeCommand() {
 
-        System.out.println(mainMenu);
+        System.out.println(TextMenus.intro);
 
         while (true) {
 
@@ -139,47 +55,83 @@ public class MainMenu {
             String command = CommandInterpreter.InputToCommand(userCommand);
 
             switch (command) {
-                case "newlead":
+                case "crm--help":
+                    System.out.println(TextMenus.mainMenu);
+                    break;
+
+                case "crmsalesreprep":
+                    System.out.println(TextMenus.reportingBySalesRep);
+                    break;
+
+                case "crmproductrep":
+                    System.out.println(TextMenus.reportingByProduct);
+                    break;
+
+                case "crmcountryrep":
+                    System.out.println(TextMenus.reportingByCountry);
+                    break;
+
+                case "crmcityrep":
+                    System.out.println(TextMenus.reportingByCity);
+                    break;
+
+                case "crmindustryrep":
+                    System.out.println(TextMenus.reportingByIndustry);
+                    break;
+
+                case "crmemployeerep":
+                    System.out.println(TextMenus.employeeCountState);
+                    break;
+
+                case "crmquantityrep":
+                    System.out.println(TextMenus.quantityState);
+                    break;
+
+                case "crmopportunityrep":
+                    System.out.println(TextMenus.opportunityState);
+                    break;
+
+                case "crmnewlead":
                     newLead();
                     break;
 
-                case "removelead":
+                case "crmremovelead":
                     removeLead();
                     break;
 
-                case "showleads":
+                case "crmshowleads":
                     showLeads();
                     break;
 
-                case "showopportunities":
+                case "crmshowopportunities":
                     showopportunities();
                     break;
 
-                case "showcontacts":
+                case "crmshowcontacts":
                     showcontacts();
                     break;
 
-                case "showaccounts":
+                case "crmshowaccounts":
                     showaccounts();
                     break;
 
-                case "lookuplead":
+                case "crmlookuplead":
                     lookuplead();
                     break;
 
-                case "convert":
+                case "crmconvert":
                     convert();
                     break;
 
-                case "close-lost":
+                case "crmclose-lost":
                     closeLost();
                     break;
 
-                case "close-won":
+                case "crmclose-won":
                     closeWon();
                     break;
 
-                case "newsalesrep":
+                case "crmnewsalesrep":
                     newSalesRep();
                     break;
 
@@ -316,13 +268,14 @@ public class MainMenu {
                     break;
 
                 case "exit":
+                    System.out.println("CRM shut down, please reset your device to restart");
                     shutdown();
 
                 default:
                     System.out.println("Not a valid option");
                     break;
             }
-            System.out.println(commandResume);
+            System.out.println(TextMenus.intro);
         }
     }
 
