@@ -5,6 +5,8 @@ package CRMDataLayer.ui;
 import java.util.List;
 import java.util.Scanner;
 
+import CRMDataLayer.enums.ProductType;
+import CRMDataLayer.enums.Status;
 import CRMDataLayer.model.Lead;
 
 import CRMDataLayer.model.SalesRep;
@@ -16,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Service;
 
+import static java.lang.Integer.parseInt;
 import static java.lang.Long.parseLong;
 
 /**
@@ -336,7 +339,15 @@ public class MainMenu {
     public void convert() {
         System.out.println("\nEnter the lead id: ");
         String leadId = userInput.nextLine();
-        opportunityService.createFromLeadId(parseLong(leadId));
+        System.out.println("\nEnter the type of truck: \n1: HYBRID\n2: FLATBED\n3: BOX\n");
+        String productType = userInput.nextLine();
+        ProductType product = ProductType.HYBRID;
+        if (productType == "1") {product = ProductType.HYBRID;}
+        if (productType == "2") {product = ProductType.FLATBED;}
+        if (productType == "3") {product = ProductType.BOX;}
+        System.out.println("\nEnter the quantity\n");
+        String quantity = userInput.nextLine();
+        opportunityService.createFromLeadId(parseLong(leadId), product, parseInt(quantity));
         System.out.println("\nOpportunity Created\n");
         System.out.println("\nWould you like to create a new Account? (Y/N)\n");
         String response = userInput.nextLine();
