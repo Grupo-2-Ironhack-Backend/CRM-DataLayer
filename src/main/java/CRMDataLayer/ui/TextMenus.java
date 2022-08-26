@@ -57,6 +57,7 @@ public class TextMenus {
             "\nUse this tool to interact with your Lead database\n" +
             "and perform operations from them:\n\n" +
             "\t\"crm showleads\": shows a list of all leads presents in database.\n" +
+            "\t\"crm showsalesreps\": shows a list of all SalesReps presents in database.\n" +
             "\t\"crm showopportunities\": shows a list of all Opportunities presents in database.\n" +
             "\t\"crm showcontacts\": shows a list of all contacts presents in database.\n" +
             "\t\"crm showaccounts\": shows a list of all accounts presents in database.\n" +
