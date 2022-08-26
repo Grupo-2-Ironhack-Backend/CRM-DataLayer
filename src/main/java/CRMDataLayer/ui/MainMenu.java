@@ -363,6 +363,15 @@ public class MainMenu {
         if (response.toLowerCase() == "y") {
             createAccount();
         }
+        if (response.toLowerCase() == "n"){
+            System.out.println(("\nInsert Account id"));
+            userInput.nextLine();
+            associateAccount();
+
+        }
+    }
+    public void associateAccount(){
+
     }
 
     public void createAccount() {

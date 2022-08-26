@@ -61,6 +61,7 @@ public class OpportunityService {
             contactRepository.save(contact);
             SalesRep salesRep = lead.get().getSalesRep();
             opportunity.setSalesRep(salesRep);
+            opportunityRepository.save();
         }
 
 
