@@ -1,10 +1,10 @@
 /**
- * An opportunity represents an specific interest
+ * An opportunity represents a specific interest
  * from a lead in one of our products. From the moment
- * a lead shows an specific interest it is
+ * a lead shows a specific interest it is
  * converted to a contact and attached to the
  * opportunity, a sales representative who
- * was attached to the preceeding lead is attached
+ * was attached to the preceding lead is attached
  * too.
  */
 package CRMDataLayer.model;

@@ -1,3 +1,12 @@
+/**
+ * Sales representative is a role in a company
+ * who tracks every business opportunity from
+ * the lead status until the opportunity is closed.
+ * It is attached to the interested customer from
+ * the beginning, being transferred to an opportunity
+ * when a lead advances further in the sales process.
+ */
+
 package CRMDataLayer.model;
 
 import org.springframework.lang.NonNull;
@@ -32,7 +41,7 @@ public class SalesRep {
 
     public SalesRep() {
         super();
-        leads = new ArrayList<Lead>();
-        opportunities = new ArrayList<Opportunity>();
+        leads = new ArrayList<>();
+        opportunities = new ArrayList<>();
     }
 }

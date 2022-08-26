@@ -1,11 +1,9 @@
 /**
- * Lead: it is an entity (human, most of the times)
+ * Lead: it is an entity (human, most of the time)
  * that showed some interest in our product, from
  * that moment it is tracked by a Sales Representative
  * who will try to convert this lead into a win
- * opportunity (an opportunity that succesfully ended
- * in a sale).
- *
+ * opportunity (an opportunity that ended in a sale).
  * A lead is tracked by a sales representative, someone
  * who can track many leads, making this a 1 to many
  * relationship.
