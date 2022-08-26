@@ -48,8 +48,7 @@ public class OpportunityService {
         return opportunityRepository.findByAccount(account);
     }
 
-    public void createFromLeadId(Long leadId) {
-        Opportunity opportunity = new Opportunity();
+    public void createFromLeadId(Long leadId, ProductType product, int quantity) {
         Optional<Lead> lead = leadRepository.findById(leadId);
         if (lead.isPresent()) {
             Contact contact = new Contact(
@@ -58,12 +57,16 @@ public class OpportunityService {
                     lead.get().getEmail(),
                     lead.get().getCompanyName()
             );
-            contactRepository.save(contact);
-            SalesRep salesRep = lead.get().getSalesRep();
-            opportunity.setSalesRep(salesRep);
-            opportunityRepository.save();
+            Contact contactBD = contactRepository.save(contact);
+            Opportunity opportunity = new Opportunity();
+            opportunity.setSalesRep(lead.get().getSalesRep());
+            opportunity.setDecisionMaker(contactBD);
+            opportunity.setStatus(Status.OPEN);
+            opportunity.setProductType(product);
+            opportunity.setNumberOfTrucks(quantity);
+            opportunityRepository.save(opportunity);
+        } else {
+            System.out.println("\nlead not found.\n");
         }
-
-
     }
 }
