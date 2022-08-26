@@ -20,7 +20,7 @@ public interface SalesRepRepository extends JpaRepository<SalesRep, Long> {
     @Query("SELECT sales_rep.name, COUNT(*) as num_opportunities FROM opportunity inner JOIN sales_rep on opportunity.sales_representative = sales_rep.id GROUP BY sales_rep.name")
     List<SalesRep> findOpportunitiesBySalesRep();
 
-    /*@Query("SELECT sales_rep.name, COUNT(*) as num_opportunities FROM opportunity inner JOIN sales_rep on opportunity.sales_representative = sales_rep.id GROUP BY sales_rep.name")
-    List<SalesRep> findClosedWonBySalesRep();*/
+    @Query("SELECT sales_rep.name, COUNT(*) as num_opportunities FROM opportunity inner JOIN sales_rep on opportunity.sales_representative = sales_rep.id GROUP BY sales_rep.name")
+    List<SalesRep> findClosedWonBySalesRep();
 
 }
