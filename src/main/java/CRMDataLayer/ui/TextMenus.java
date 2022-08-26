@@ -100,5 +100,5 @@ public class TextMenus {
             "\t\"crm employeerep\": show options for employeeCount reporting\n" +
             "\t\"crm quantityrep\": show options for Quantity reporting\n" +
             "\t\"crm opportunityrep\": show options for Opportunity reporting\n" +
-            "\t\"crm exit\": exits the program\n";
+            "\t\"exit\": exits the program\n";
 }
