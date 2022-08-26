@@ -9,11 +9,14 @@ import CRMDataLayer.model.Lead;
 
 import CRMDataLayer.model.SalesRep;
 import CRMDataLayer.service.LeadService;
+import CRMDataLayer.service.OpportunityService;
 import CRMDataLayer.service.SalesRepService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Service;
+
+import static java.lang.Long.parseLong;
 
 /**
  * Management of the main menu and user input commands.
@@ -26,6 +29,8 @@ public class MainMenu {
 
     @Autowired
     SalesRepService salesRepService;
+    @Autowired
+    OpportunityService opportunityService;
 
     @Autowired
      private ApplicationContext context;
@@ -329,8 +334,19 @@ public class MainMenu {
     }
 
     public void convert() {
+        System.out.println("\nEnter the lead id: ");
+        String leadId = userInput.nextLine();
+        opportunityService.createFromLeadId(parseLong(leadId));
+        System.out.println("\nOpportunity Created\n");
+        System.out.println("\nWould you like to create a new Account? (Y/N)\n");
+        String response = userInput.nextLine();
+        if (response.toLowerCase() == "y") {
+            createAccount();
+        }
     }
 
+    public void createAccount() {
+    }
     public void closeLost() {
     }
 
