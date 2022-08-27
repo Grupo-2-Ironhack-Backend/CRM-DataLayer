@@ -24,10 +24,8 @@ public class LeadService {
 
     public Lead findById(Long id){
         if (leadRepository.findById(id).isPresent()) {
-            System.out.println("NO ESTA VACIO");
             return leadRepository.findById(id).get();
         }
-        System.out.println("SI ESTA VACIO");
         return null;
     }
 

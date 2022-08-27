@@ -357,56 +357,110 @@ public class MainMenu {
     }
 
     public void convert() {
+        Long id;
+        ProductType productType = null;
+        int trucks;
+        Opportunity opportunity;
+        Lead lead;
+        Activity activity = null;
+        Account account;
+        Contact contact;
 
-        System.out.println("Enter an id to look for: ");
-        Long userLeadToConvert = userInput.nextLong();
-        Lead lead = null;
-
-        ProductType product;
-        while (true) {
+        while (true){
             try {
-                System.out.println("\nChoose between: HYBRID, FLATBED or BOX: ");
-                product = ProductType.valueOf(userInput.nextLine().toUpperCase());
+                System.out.println("Escriba el ID: ");
+                id = this.userInput.nextLong();
+                if (leadService.findById(id) == null){
+                    System.out.println("Id no encontrado");
+                    int n = Integer.parseInt("M");
+                }
+                System.out.println("EXITO");
                 break;
-            } catch (Exception e) {
-                System.out.println("Not a valid option");
+            } catch (Exception e){
+                e.getMessage();
             }
         }
 
-        System.out.println("\nHow many trucks?");
-        int stringTrucks = userInput.nextInt();
+        while (true){
+            try {
+                userInput = new Scanner(System.in);
+                System.out.println("Elija entre: HYBRID, FLATBED o BOX: ");
+                String s = this.userInput.nextLine().toUpperCase();
+                switch (s){
+                    case "HYBRID": productType = ProductType.HYBRID;
+                        System.out.println("EXITO");
+                    break;
+                    case "BOX": productType = ProductType.BOX;
+                        System.out.println("EXITO");
+                    break;
+                    case "FLATBED": productType = ProductType.FLATBED;
+                        System.out.println("EXITO");
+                        break;
+                    default:
+                        System.out.println("No se ha encontrado tu tipo de producto");
+                            int n = Integer.parseInt("M");
+                }
+                break;
+            }catch (Exception e){
+                e.getMessage();
+            }
+        }
+
+        while (true) {
+            try {
+                System.out.println("\nHow many trucks?");
+                String stringTrucks = userInput.nextLine();
+                trucks = Integer.parseInt(stringTrucks);
+                break;
+            } catch (Exception e) {
+                System.out.println("Not a numeric value");
+            }
+        }
 
         System.out.println("Would you like to create a new Account? (Y/N)");
-        String s = userInput.nextLine();
+        String s = userInput.nextLine().toUpperCase();
 
-
-        lead = leadService.findById(userLeadToConvert);
-
-
-        assert lead != null;
-        Opportunity opportunity = new Opportunity(product,stringTrucks, Status.OPEN,lead.getSalesRep());
-        //opportunityRepository.save(new Opportunity(product,stringTrucks, Status.OPEN,lead.getSalesRep()));
-
-
-
-        if (s.equals("y")){
+        if (s.equals("Y")){
             System.out.println("Enter industry [Produce/Ecommerce/Manufacturing/Medical]: ");
-            String industryName = CommandInterpreter.InputToCommand(userInput.nextLine());
-            Activity userIndustry = null;
-
-            for (Activity industry : Activity.values()) {
-                if (industryName.equals(industry.activityLabel.toLowerCase())) {
-                    userIndustry = industry;
-                    break;
-                }
+            String s1 = userInput.nextLine();
+            switch (s1){
+                case "Produce": activity=Activity.PRODUCE;
+                break;
+                case "Ecommerce": activity=Activity.ECOMMERCE;
+                break;
+                case "Manufacturing": activity=Activity.MANUFACTURING;
+                break;
+                case "Medical": activity=Activity.MEDICAL;
+                break;
             }
-
-
             System.out.println("\nEnter the city: ");
             String city = userInput.nextLine();
 
             System.out.println("\nEnter the country: ");
             String country = userInput.nextLine();
+
+            lead = leadService.findById(id);
+
+            contact = new Contact(lead.getName(),lead.getPhoneNumber(),lead.getEmail(),lead.getCompanyName());
+            account = new Account(activity,city,country);
+            opportunity = new Opportunity(productType,trucks,Status.OPEN,lead.getSalesRep());
+            opportunity.setAccount(account);
+            opportunity.setDecisionMaker(contact);
+
+
+            opportunityRepository.save(opportunity);
+            /*accountRepository.save(account);
+            contactRepository.save(contact);*/
+
+
+        } else if (s.equals("N")){
+            userInput = new Scanner(System.in);
+            System.out.println("Enter an id to look for: ");
+            Long accountId = userInput.nextLong();
+        } else {
+            System.out.println("Elige una opción correcta");
+        }
+    /*
 
             Account account = new Account(userIndustry,city,country);
             account.setOpportunities(List.of(opportunity));
@@ -429,7 +483,7 @@ public class MainMenu {
                 account.setOpportunities(List.of(opportunity));
             }
         }
-
+        */
     }
 
     public void closeLost() {

@@ -37,8 +37,6 @@ public class CrmDataLayerApplication {
 		System.out.println(lead6);
 
 		*/
-
-
 		menu.executeCommand();
 	}
 
