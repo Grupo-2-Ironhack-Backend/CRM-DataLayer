@@ -1,6 +1,5 @@
 package CRMDataLayer.service;
 
-import CRMDataLayer.model.Lead;
 import CRMDataLayer.model.SalesRep;
 import CRMDataLayer.repository.SalesRepRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +13,13 @@ public class SalesRepService {
     @Autowired
     SalesRepRepository salesRepRepository;
 
-    public List<SalesRep> findByName(String name) {
-        return salesRepRepository.findByName(name);
+    public SalesRep findBySalesRepId(Long id){
+        if (salesRepRepository.findById(id).isPresent())
+            return salesRepRepository.findById(id).get();
+        return null;
     }
 
-    public List<SalesRep> findAll() {
+    public List<SalesRep> findAll(){
         return salesRepRepository.findAll();
     }
 

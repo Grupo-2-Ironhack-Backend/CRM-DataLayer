@@ -21,6 +21,7 @@ public class CrmDataLayerApplication {
 
 	@Bean
 	public void run() {
+
 		menu.executeCommand();
 	}
 

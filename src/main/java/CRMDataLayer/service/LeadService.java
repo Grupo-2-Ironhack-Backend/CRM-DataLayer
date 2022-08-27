@@ -3,7 +3,6 @@ package CRMDataLayer.service;
 import CRMDataLayer.model.Lead;
 import CRMDataLayer.model.SalesRep;
 import CRMDataLayer.repository.LeadRepository;
-import CRMDataLayer.repository.SalesRepRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +18,13 @@ public class LeadService {
             System.out.println("no results found");
         } else {
             return leadRepository.findAll();
+        }
+        return null;
+    }
+
+    public Lead findById(Long id){
+        if (leadRepository.findById(id).isPresent()) {
+            return leadRepository.findById(id).get();
         }
         return null;
     }

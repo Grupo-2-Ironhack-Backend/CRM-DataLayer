@@ -38,7 +38,7 @@ public class Opportunity {
     private Status status;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="opportunity")
+    @JoinColumn(name="decision_maker")
     private Contact decisionMaker;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -46,12 +46,13 @@ public class Opportunity {
     private SalesRep salesRep;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="opportunities")
+    @JoinColumn(name="account")
     private Account account;
 
-    public Opportunity(ProductType productType, int numberOfTrucks, Status status) {
+    public Opportunity(ProductType productType, int numberOfTrucks, Status status, SalesRep salesRep) {
         this.productType = productType;
         this.numberOfTrucks = numberOfTrucks;
         this.status = status;
+        this.salesRep = salesRep;
     }
 }
