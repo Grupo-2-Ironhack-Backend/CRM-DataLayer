@@ -37,16 +37,16 @@ public class Opportunity {
     @Column(name="status")
     private Status status;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="opportunity")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="decision_maker")
     private Contact decisionMaker;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="sales_representative")
     private SalesRep salesRep;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="opportunities")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="account")
     private Account account;
 
     public Opportunity(ProductType productType, int numberOfTrucks, Status status, SalesRep salesRep) {

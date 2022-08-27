@@ -43,7 +43,7 @@ public class Account {
     // 1 account holds n opportunities -->
     // 1 opportunity holds 1 decisionMaker -->
     // 1 account holds n decisionMaker (contact)
-    @OneToMany(mappedBy="account", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="account", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Opportunity> opportunities;
 
     @OneToMany(mappedBy="account", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -53,8 +53,6 @@ public class Account {
         this.industry = industry;
         this.city = city;
         this.country = country;
-        this.opportunities = new ArrayList<>();
-        this.contacts = new ArrayList<>();
     }
 
     public Account() {

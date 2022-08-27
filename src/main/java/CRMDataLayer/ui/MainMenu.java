@@ -318,7 +318,7 @@ public class MainMenu {
         System.out.println("\nSalesRep Id");
         Long salesRepId = this.userInput.nextLong();
         if (this.salesRepRepository.findById(salesRepId).isPresent()) {
-            this.leadRepository.save(new Lead("Raul", "45446556", "sadasd@sdas.com", "company", this.salesRepService.findBySalesRepId(salesRepId)));
+            this.leadRepository.save(new Lead(leadName, leadPhone, leadMail, companyLead, salesRepService.findBySalesRepId(salesRepId)));
         } else {
             System.out.println("No existe ese ID");
         }
@@ -351,6 +351,7 @@ public class MainMenu {
     }
 
     public void showaccounts() {
+        System.out.println("Lista de cuentas");
     }
 
     public void lookuplead() {
@@ -363,45 +364,54 @@ public class MainMenu {
         Opportunity opportunity;
         Lead lead;
         Activity activity = null;
-        Account account;
+        Account account = null;
         Contact contact;
 
-        while (true){
+        while (true) {
             try {
                 System.out.println("Escriba el ID: ");
+                showLeads();
                 id = this.userInput.nextLong();
-                if (leadService.findById(id) == null){
+                if (leadService.findById(id) == null) {
                     System.out.println("Id no encontrado");
+                    showLeads();
                     int n = Integer.parseInt("M");
                 }
                 System.out.println("EXITO");
                 break;
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.getMessage();
             }
         }
 
-        while (true){
+        lead = leadService.findById(id);
+        contact = new Contact(lead.getName(), lead.getPhoneNumber(), lead.getEmail(), lead.getCompanyName());
+        leadRepository.delete(lead);
+
+        while (true) {
             try {
                 userInput = new Scanner(System.in);
                 System.out.println("Elija entre: HYBRID, FLATBED o BOX: ");
                 String s = this.userInput.nextLine().toUpperCase();
-                switch (s){
-                    case "HYBRID": productType = ProductType.HYBRID;
+                switch (s) {
+                    case "HYBRID":
+                        productType = ProductType.HYBRID;
                         System.out.println("EXITO");
-                    break;
-                    case "BOX": productType = ProductType.BOX;
+                        break;
+                    case "BOX":
+                        productType = ProductType.BOX;
                         System.out.println("EXITO");
-                    break;
-                    case "FLATBED": productType = ProductType.FLATBED;
+                        break;
+                    case "FLATBED":
+                        productType = ProductType.FLATBED;
                         System.out.println("EXITO");
                         break;
                     default:
                         System.out.println("No se ha encontrado tu tipo de producto");
-                            int n = Integer.parseInt("M");
+                        int n = Integer.parseInt("M");
                 }
                 break;
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.getMessage();
             }
         }
@@ -417,21 +427,30 @@ public class MainMenu {
             }
         }
 
+        opportunity = new Opportunity(productType, trucks, Status.OPEN, lead.getSalesRep());
+        opportunity.setDecisionMaker(contact);
+        opportunity.setSalesRep(lead.getSalesRep());
+
         System.out.println("Would you like to create a new Account? (Y/N)");
         String s = userInput.nextLine().toUpperCase();
 
-        if (s.equals("Y")){
+        Long accountId = null;
+        if (s.equals("Y")) {
             System.out.println("Enter industry [Produce/Ecommerce/Manufacturing/Medical]: ");
             String s1 = userInput.nextLine();
-            switch (s1){
-                case "Produce": activity=Activity.PRODUCE;
-                break;
-                case "Ecommerce": activity=Activity.ECOMMERCE;
-                break;
-                case "Manufacturing": activity=Activity.MANUFACTURING;
-                break;
-                case "Medical": activity=Activity.MEDICAL;
-                break;
+            switch (s1) {
+                case "Produce":
+                    activity = Activity.PRODUCE;
+                    break;
+                case "Ecommerce":
+                    activity = Activity.ECOMMERCE;
+                    break;
+                case "Manufacturing":
+                    activity = Activity.MANUFACTURING;
+                    break;
+                case "Medical":
+                    activity = Activity.MEDICAL;
+                    break;
             }
             System.out.println("\nEnter the city: ");
             String city = userInput.nextLine();
@@ -439,51 +458,25 @@ public class MainMenu {
             System.out.println("\nEnter the country: ");
             String country = userInput.nextLine();
 
-            lead = leadService.findById(id);
-
-            contact = new Contact(lead.getName(),lead.getPhoneNumber(),lead.getEmail(),lead.getCompanyName());
-            account = new Account(activity,city,country);
-            opportunity = new Opportunity(productType,trucks,Status.OPEN,lead.getSalesRep());
-            opportunity.setAccount(account);
-            opportunity.setDecisionMaker(contact);
+            account = new Account(activity, city, country);
+            accountRepository.save(account);
 
 
-            opportunityRepository.save(opportunity);
-            /*accountRepository.save(account);
-            contactRepository.save(contact);*/
-
-
-        } else if (s.equals("N")){
+        } else if (s.equals("N")) {
             userInput = new Scanner(System.in);
             System.out.println("Enter an id to look for: ");
-            Long accountId = userInput.nextLong();
+            showaccounts();
+            accountId = userInput.nextLong();
+            account = accountRepository.findById(accountId).get();
         } else {
             System.out.println("Elige una opción correcta");
         }
-    /*
 
-            Account account = new Account(userIndustry,city,country);
-            account.setOpportunities(List.of(opportunity));
-            Contact contact = new Contact(lead.getName(),lead.getPhoneNumber(),lead.getEmail(),lead.getCompanyName());
-            contact.setOpportunity(opportunity);
-            contact.setAccount(account);
-            account.setContacts(List.of(contact));
-            opportunity.setAccount(account);
+        contact.setAccount(account);
+        opportunity.setAccount(account);
+        contactRepository.save(contact);
+        opportunityRepository.save(opportunity);
 
-            accountRepository.save(account);
-            opportunityRepository.save(opportunity);
-            contactRepository.save(contact);
-
-        } else if(s.equals("n")){
-            System.out.println("Enter an id to look for: ");
-            Long accountId = userInput.nextLong();
-
-            if(accountRepository.findById(accountId).isPresent()){
-                Account account = accountRepository.findById(accountId).get();
-                account.setOpportunities(List.of(opportunity));
-            }
-        }
-        */
     }
 
     public void closeLost() {
