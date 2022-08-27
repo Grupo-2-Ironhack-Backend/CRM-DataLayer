@@ -23,5 +23,7 @@ public class SalesRepService {
         return salesRepRepository.findAll();
     }
 
+    public List<SalesRep> findByName(String name){ return salesRepRepository.findByName(name); }
+
 
 }

@@ -55,4 +55,10 @@ public class Opportunity {
         this.status = status;
         this.salesRep = salesRep;
     }
+
+    public Opportunity(ProductType productType, int numberOfTrucks, Status status) {
+        this.productType = productType;
+        this.numberOfTrucks = numberOfTrucks;
+        this.status = status;
+    }
 }

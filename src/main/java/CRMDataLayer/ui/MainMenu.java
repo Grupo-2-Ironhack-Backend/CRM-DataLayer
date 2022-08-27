@@ -4,15 +4,13 @@ import java.util.List;
 import java.util.Scanner;
 
 import CRMDataLayer.enums.ProductType;
+import CRMDataLayer.enums.Status;
 import CRMDataLayer.model.*;
-
 import CRMDataLayer.repository.AccountRepository;
 import CRMDataLayer.repository.ContactRepository;
 import CRMDataLayer.repository.OpportunityRepository;
 import CRMDataLayer.repository.SalesRepRepository;
 import CRMDataLayer.enums.Activity;
-import CRMDataLayer.enums.Status;
-
 import CRMDataLayer.repository.*;
 import CRMDataLayer.service.LeadService;
 import CRMDataLayer.service.OpportunityService;
@@ -21,9 +19,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Service;
-
-import static java.lang.Integer.parseInt;
-import static java.lang.Long.parseLong;
 
 /**
  * @Author: TheBigFive {Kat, Paula, Jhon, Gerard & Alex}
@@ -343,15 +338,6 @@ public class MainMenu {
         String leadMail = this.userInput.nextLine();
         System.out.println("\nCompany name: ");
         String companyLead = this.userInput.nextLine();
-        System.out.println("\nSalesRep Id");
-        Long salesRepId = this.userInput.nextLong();
-        if (this.salesRepRepository.findById(salesRepId).isPresent()) {
-            this.leadRepository.save(new Lead(leadName, leadPhone, leadMail, companyLead, salesRepService.findBySalesRepId(salesRepId)));
-        } else {
-            System.out.println("No existe ese ID");
-        }
-
-
         // Adding the Sales Rep from the ones available in the database
         SalesRep salesRep;
         while (true) {
@@ -375,45 +361,62 @@ public class MainMenu {
     }
 
     public void showLeads() {
-        List<Lead> leads = this.leadService.findAll();
-
-        for (Lead lead : leads) {
-            System.out.println("Id: " + lead.getId() + " | Name: " + lead.getName() + " | Company: " + lead.getCompanyName());
-
+        List<Lead> leads;
+        leads = leadRepository.findAll();
+        if (!leads.isEmpty()) {
+            for (Lead lead : leads) {
+                System.out.println("Id: " + lead.getId() + " | Name: " + lead.getName() + " | Company: " + lead.getCompanyName());
+            }
+        } else {
+            System.out.println("No leads found. Please create your first one.");
         }
     }
 
     public void showopportunities() {
         List<Opportunity> opportunities = opportunityRepository.findAll();
-        for (Opportunity opportunity : opportunities) {
-            System.out.println("Id: " + opportunity.getId() +
-                       " | Product: " + opportunity.getProductType() +
+        if (!opportunities.isEmpty()) {
+            for (Opportunity opportunity : opportunities) {
+                System.out.println("Id: " + opportunity.getId() +
+                        " | Product: " + opportunity.getProductType() +
                         " | Trucks: " + opportunity.getNumberOfTrucks() +
                         " | Status: " + opportunity.getStatus());
+            }
+        } else {
+            System.out.println("No opportunities found. Please create your first one by converting a lead into an opportunity.");
         }
     }
     public void showSalesReps() {
         List<SalesRep> salesRep = salesRepService.findAll();
-        for (SalesRep salesRep_i : salesRep) {
-            System.out.println("Id: " + salesRep_i.getId() + " | Name: " + salesRep_i.getName());
+        if (!salesRep.isEmpty()) {
+            for (SalesRep salesRep_i : salesRep) {
+                System.out.println("Id: " + salesRep_i.getId() + " | Name: " + salesRep_i.getName());
+            }
+        } else {
+            System.out.println("No sales representatives found. Please create your first one.");
         }
+
     }
 
     public void showcontacts() {
         List<Contact> contacts = contactRepository.findAll();
-        for (Contact contact : contacts) {
-            System.out.println("Id: " + contact.getId() + " | Name: " + contact.getName());
+        if (!contacts.isEmpty()) {
+            for (Contact contact : contacts) {
+                System.out.println("Id: " + contact.getId() + " | Name: " + contact.getName());
+            }
+        } else {
+            System.out.println("No contacts found. Please create your first one by converting a lead into an opportunity.");
         }
     }
 
     public void showaccounts() {
-
         List<Account> accounts = accountRepository.findAll();
-for (Account account : accounts) {
-            System.out.println("Id: " + account.getId() + " | Industry: " + account.getIndustry() + " | City: " + account.getCity());
+        if (!accounts.isEmpty()) {
+            for (Account account : accounts) {
+                System.out.println("Id: " + account.getId() + " | Industry: " + account.getIndustry() + " | City: " + account.getCity());
+            }
+        } else {
+            System.out.println("No accounts found. Please create your first one by converting a lead into an opportunity.");
         }
-
-
     }
 
     public void lookuplead() {
@@ -490,7 +493,7 @@ for (Account account : accounts) {
             }
         }
 
-        opportunity = new Opportunity(productType, trucks, Status.OPEN, lead.getSalesRep());
+        opportunity = new Opportunity(productType, trucks, Status.OPEN);
         opportunity.setDecisionMaker(contact);
         opportunity.setSalesRep(lead.getSalesRep());
 
@@ -539,11 +542,10 @@ for (Account account : accounts) {
         opportunity.setAccount(account);
         contactRepository.save(contact);
         opportunityRepository.save(opportunity);
-
-
+        System.out.println("EXITO");
     }
-    public void associateAccount(){
 
+    public void associateAccount(){
     }
 
     public void createAccount() {
