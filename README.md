@@ -8,11 +8,12 @@ This CRM allows us to:
 
 - Track Leads
 - Convert Leads into Opportunities
+- Associate Sales Representarives with Leads or Opportunities
 - Associate an Opportunity with an Account.
-- Associate Contacts with an Opportunity.
-- Generate a wide variety of reports.
+- Associate a Contact with an Opportunity.
+- Generate a wide variety of reports. (In fact . . . maybe not that wide of a variety)
 
-Leads, Contacts, Opportunities and Accounts are stored in a MySQLremote database so you never loose information from your beloved customers.
+Leads, Sales Representatives, Contacts, Opportunities and Accounts are stored in a MySQLremote database so you never loose information from your beloved customers.
 
 ## Diagrams
 
@@ -36,8 +37,10 @@ showleads: <br>
 showopportunities: <br>
 showcontacts: <br>
 showaccounts: <br>
+showsalesreps: <br>
 lookuplead: <br>
 newlead: <br>
+newsalesrep: <br>
 removelead: <br>
 convert: <br>
 close-lost: <br>
@@ -49,12 +52,14 @@ list of leads<br>
 list of opportunities<br>
 list of contacts<br>
 list of accounts<br>
+list of opportunities<br>
 specific lead by id<br>
 create a new lead<br>
+create a new sales representative<br>
 removes a lead<br>
-converts a lead to an opportunity<br>
-opportunity status changed to lost sale<br>
-opportunity status changed to won sale<br>
+converts leads to opportunities<br>
+opportunity status lost <br>
+opportunity status won <br>
 exits the program<br>
 </td>
  </tr>
@@ -62,11 +67,9 @@ exits the program<br>
 
 ## Requirements
 
-In order to connect to the database we will provide you the credentials needed -user and password-, then just put them in the application.properties, you are ready to go.
+We are providing our own database. Just clone the code, open it with IntelliJ and you are good to go.
 
-After that you have two options to run the code:
-- Option 1: You need to have IntelliJ in your local system to clone this repository and run it.
-- Option 2: Alternatively, you can build a Docker image by using the Dockerfile included in the repository and run your own image.
+Remember that in order to try the tests you need to comment the 'run()' method in the class CrmDataLayerApplication.java 
 
 ## Usage
 
